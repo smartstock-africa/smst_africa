@@ -30,3 +30,12 @@ jobs:
       - name: Check commit messages
         if: github.event_name == 'pull_request'
         run: npx commitlint --from "${{ github.event.pull_request.base.sha }}" --to "${{ github.event.pull_request.head.sha }}"
+      
+      - name: setup Python3 environment
+        run: python3 -m venv venv
+
+      - name: Install dependencies
+        run: venv/bin/pip install -r requirements.txt
+
+      - name: Run Tests
+        run: venv/bin/python manage.py test test.models 
