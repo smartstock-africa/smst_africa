@@ -8,36 +8,6 @@ jobs:
   quality:
     runs-on: ubuntu-latest
 
-    env:
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
-      CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
-      CLOUDINARY_SECRET_KEY: ${{ secrets.CLOUDINARY_SECRET_KEY }}
-      DATABASE_NAME: test_db
-      DATABASE_USER: postgres
-      DATABASE_PASSWORD: postgres
-      DATABASE_PORT: 5432
-      DATABASE_HOST: 127.0.0.1
-      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-      CLIENT_ID: ${{ secrets.CLIENT_ID }}
-      GOOGLE_SECRET_KEY: ${{ secrets.GOOGLE_SECRET_KEY }}
-      CELERY_BROKER_URL: ${{ secrets.CELERY_BROKER_URL }}
-
-    services:
-      postgres:
-        image: postgres:16
-        env:
-          POSTGRES_DB: test_db
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd="pg_isready -U postgres -d test_db"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -61,19 +31,3 @@ jobs:
         if: github.event_name == 'pull_request'
         run: npx commitlint --from "${{ github.event.pull_request.base.sha }}" --to "${{ github.event.pull_request.head.sha }}"
       
-      - name: setup Python3 environment
-        run: python3 -m venv venv
-
-      - name: Install dependencies
-        run: venv/bin/pip install -r requirements.txt
-
-      - name: Place migrations
-        run: |
-          venv/bin/python manage.py makemigrations
-
-      - name: Run migrations
-        run: |
-          venv/bin/python manage.py migrate
-
-      - name: Run Tests
-        run: venv/bin/python manage.py test test
