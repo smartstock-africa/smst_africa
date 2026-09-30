@@ -5,7 +5,6 @@ ip_keys.py
 asgi.py
 logs/
 __pycache__/
-migrations/
 scripts/
 node_modules/
 staticfiles/
