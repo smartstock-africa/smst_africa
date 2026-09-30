@@ -1,6 +1,5 @@
 venv/
 *env
-celery.py
 hosts.py
 ip_keys.py
 asgi.py
