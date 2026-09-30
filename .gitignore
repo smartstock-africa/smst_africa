@@ -1,6 +1,5 @@
 venv/
 *env
-hosts.py
 ip_keys.py
 asgi.py
 logs/
