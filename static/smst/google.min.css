@@ -1,0 +1,1 @@
+p{font-family:var(--Figtree);font-size:var(--base-font-size);margin:12px 0}.googleSignInBox{position:absolute;top:0;left:0;height:100dvh;width:100vw;display:flex}.formBoxHolder{margin:auto;background:var(--secondary-color);padding:var(--spacing);border-radius:12px;box-shadow:var(--shadow);width:min(400px,calc(100vw - 2rem))}form{display:flex}button{border-radius:4px;width:100%}

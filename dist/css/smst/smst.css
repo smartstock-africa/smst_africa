@@ -1,0 +1,410 @@
+@font-face {
+  font-family: Figtree;
+  src: url('https://static.smartstock.africa/font/figtree.ttf');
+}
+
+@font-face {
+  font-family: Jost;
+  src: url('https://static.smartstock.africa/font/jost.ttf');
+}
+
+@font-face {
+  font-family: BonaNova;
+  src: url('https://static.smartstock.africa/font/BonaNova-Regular.ttf');
+}
+
+@font-face {
+  font-family: Inconsolata;
+  src: url('https://static.smartstock.africa/font/inconsolata.ttf');
+}
+
+:root {
+  --primary-color: #3f6a7b;
+  --secondary-color: #e4dfd8;
+  --Figtree: Figtree, sans-serif;
+  --Jost: Jost, sans-serif;
+  --BonaNova: BonaNova, serif;
+  --Inconsolata: Inconsolata, serif;
+  --gradient: linear-gradient(
+    180deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  --white-color-text: #eeeeee;
+  --black-color-text: #010101;
+  --base-font-value: 20px;
+  --base-font-size: 16px;
+  --base-line-height: 1.41;
+  --ratio: 1.618;
+  --small-font-size: calc(var(--base-font-value) / var(--ratio));
+  --small-line-height: calc(
+    var(--base-line-height) -
+      (var(--small-font-size) - var(--base-font-value)) / 100
+  );
+  --tiny-font-size: calc(var(--small-font-size) / var(--ratio));
+  --tiny-line-height: calc(
+    var(--base-line-height) - (var(--tiny-font-size) - var(--base-font-value)) /
+      100
+  );
+
+  --normal-font-size: calc(var(--base-font-value));
+  --large-font-size: calc(var(--normal-font-size) * var(--ratio));
+  --large-line-height: calc(
+    var(--base-line-height) -
+      (var(--large-font-size) - var(--base-font-value)) / 100
+  );
+
+  --xl-font-size: calc(var(--large-font-size) * var(--ratio));
+  --xl-line-height: calc(
+    var(--base-line-height) - (var(--xl-font-size) - var(--base-font-value)) /
+      100
+  );
+
+  --2xl-font-size: calc(var(--xl-font-size) * var(--ratio));
+  --2xl-line-height: calc(
+    var(--base-line-height) - (var(--2xl-font-size) - var(--base-font-value)) /
+      100
+  );
+  --spacing: min(12px, 2%);
+
+  --font-weight-bold: 500;
+  --font-weight-semibold: 350;
+  --font-weight-heavy: 750;
+
+  --shadow:
+    0px 4px 6px -4px rgba(0, 0, 0, 0.15), 0px 10px 15px 5px rgba(0, 0, 0, 0.15);
+
+  --positive-color-background: #4caf50;
+  --negative-color-background: #b20000;
+  --warning-color-background: #963600;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  transition: all 0.3s ease-in-out;
+  scrollbar-width: thin;
+  animation-duration: 0.3s !important;
+  scrollbar-color: var(--secondary-color) var(--primary-color);
+}
+
+body {
+  background: var(--secondary-color);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+svg {
+  display: block;
+}
+
+.flex {
+  display: flex;
+  gap: var(--spacing);
+}
+
+.flex.align-center {
+  align-items: center;
+}
+
+.flex.justify-center {
+  justify-content: center;
+}
+
+.flex.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.headerLogoImageHolder {
+  width: clamp(36px, 4vw, 48px);
+}
+
+#header {
+  display: flex;
+  text-wrap-mode: nowrap;
+  padding: var(--spacing);
+  z-index: 2;
+  position: relative;
+}
+
+#headerLogo {
+  padding: var(--spacing);
+}
+
+.headerLogoText {
+  font-family: var(--Jost);
+  font-size: clamp(var(--base-font-size), 3vw, var(--normal-font-size));
+  color: var(--white-color-text);
+  font-weight: var(--font-weight-bold);
+}
+
+.CTAButton {
+  font-family: var(--Figtree);
+  background: var(--secondary-color);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: clamp(var(--small-font-size), 3vw, 1rem);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+  color: var(--black-color-text);
+}
+
+.headerElementContainer {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-content: center;
+}
+
+#headerNavBar {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0px var(--spacing);
+}
+
+.navbarElements {
+  font-family: var(--Figtree);
+  color: var(--white-color-text);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--base-font-size);
+}
+
+.navbar {
+  user-select: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-top: 2px;
+}
+
+.navbar:hover {
+  border-bottom: 2px solid var(--white-color-text);
+}
+
+.navbar:active {
+  border-bottom: 2px solid transparent;
+}
+
+.shader {
+  height: 100dvh;
+  width: 100vw;
+  background: var(--gradient);
+  pointer-events: none;
+  user-select: none;
+  position: absolute;
+  z-index: -1;
+}
+
+.headerLogoContainer {
+  text-decoration: none;
+}
+
+#notification-center,
+.absolute {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  height: 100dvh;
+  width: 100vw;
+  display: flex;
+  overflow: hidden;
+}
+
+#notification-center {
+  pointer-events: none;
+}
+
+.notification {
+  padding: var(--spacing);
+  color: var(--white-color-text);
+  font-family: var(--Figtree);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  align-items: center;
+  gap: 12px;
+}
+
+.success {
+  background: var(--positive-color-background);
+}
+
+.error {
+  background: var(--negative-color-background);
+}
+
+.notification-header {
+  font-weight: 600;
+  font-size: var(--normal-font-size);
+  font-family: var(--Jost);
+}
+
+.notification-center-holder {
+  margin: auto;
+  margin-bottom: 12px;
+  width: min(400px, calc(100vw - 2rem));
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notification-container .notification {
+  margin: 12px auto;
+  box-shadow: none;
+}
+
+h1 {
+  font-family: var(--BonaNova);
+  font-size: var(--large-font-size);
+  font-weight: var(--font-weight-heavy);
+}
+
+button {
+  border: none;
+  background: var(--primary-color);
+  border-radius: 12pc;
+  padding: 12px 24px;
+  color: var(--white-color-text);
+  font-family: var(--Figtree);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--base-font-size);
+  width: 80%;
+  margin: var(--spacing);
+  user-select: none;
+  cursor: pointer;
+  text-wrap-mode: nowrap;
+  position: relative;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  transition: all 0.3s linear;
+  pointer-events: none;
+}
+
+button:disabled {
+  pointer-events: none;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.auto-margin {
+  width: min(400px, calc(100vw - 2rem));
+  margin: auto;
+  background: var(--secondary-color);
+  padding: var(--spacing);
+  border-radius: 12px;
+}
+
+input {
+  padding: 12px;
+  border: 1px solid var(--primary-color);
+  font-size: var(--base-font-size);
+  font-family: var(--Figtree);
+  width: 100%;
+}
+
+input.positiveInput {
+  border: 1px solid var(--positive-color-background);
+}
+
+input.negativeInput {
+  border: 1px solid var(--positive-color-background);
+}
+
+.feedback-icon {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: grid;
+  align-items: center;
+  padding: 0px 8px;
+}
+
+.loading-feedback,
+.positive-feedback,
+.negative-feedback {
+  opacity: 0;
+}
+
+.feedback-icon.loading .loading-feedback {
+  opacity: 1;
+}
+.feedback-icon.negative .negative-feedback {
+  opacity: 1;
+}
+
+.feedback-icon.positive .positive-feedback {
+  opacity: 1;
+}
+
+.feedback-icon-holder {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.inputHolder {
+  position: relative;
+  margin: var(--spacing);
+}
+
+.rotateIconClockWise {
+  animation: rotateClockWise infinite linear;
+  transform-origin: center;
+  animation-duration: 2s !important;
+}
+
+.rotateIconAntiClockWise {
+  animation: rotateAntiClockWise infinite linear;
+  transform-origin: center;
+  animation-duration: 2s !important;
+}
+
+.positive-msg {
+  color: var(--positive-color-background);
+}
+
+.negative-msg {
+  color: var(--negative-color-background);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  button:hover::before {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+button:active::before {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+@keyframes rotateClockWise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateAntiClockWise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}

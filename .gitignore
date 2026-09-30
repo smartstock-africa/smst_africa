@@ -1,5 +1,9 @@
 venv/
-smst/
+*env
+celery.py
+hosts.py
+ip_keys.py
+asgi.py
 logs/
 __pycache__/
 migrations/
