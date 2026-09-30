@@ -1,2 +1,3 @@
 npm run format-check
 npm run lint
+python3 manage.py test test.test_models --settings=smst.test_settings
