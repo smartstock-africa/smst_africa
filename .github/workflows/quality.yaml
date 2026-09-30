@@ -52,6 +52,10 @@ jobs:
       - name: Install dependencies
         run: venv/bin/pip install -r requirements.txt
 
+      - name: Run migrations
+        run: |
+          venv/bin/python manage.py migrate
+
       - name: Run Tests
         env:  
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
