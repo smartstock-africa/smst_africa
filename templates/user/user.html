@@ -1,0 +1,22 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmSt Account</title>
+    {% include 'smst/smst_header.html' %}
+    <link rel="stylesheet" href="{% static 'account/account.min.css' %}">
+  </head>
+  <body>
+    {% include 'snippets/theme/shader.html' %}
+
+    <main>
+      <div id="mainContent" class="absolute">
+        {% block content %}{% endblock %}
+        
+      </div>
+    </main>
+    <script type="module" src="{% static 'js/account/account.prod.js' %}"></script>
+  </body>
+</html>

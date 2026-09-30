@@ -1,0 +1,10 @@
+{% extends 'snippets/attachables/formFooter.html' %}
+
+{% block content  %}
+<div class="footerText">
+      <span>By Logging In, you agree to our <a href="">Terms of Service</a> and <a href="">Privacy Policy</a></span>
+    </div>
+    <div class="footerText">
+      <span>Forgot your password? <a hx-get="?page=reset_password" hx-target="#formContent" hx-swap="replace" hx-push-url="">Reset Here</a></span>
+    </div>
+{% endblock %}

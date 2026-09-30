@@ -1,0 +1,8 @@
+venv/
+smst/
+logs/
+__pycache__/
+migrations/
+scripts/
+node_modules/
+staticfiles/
