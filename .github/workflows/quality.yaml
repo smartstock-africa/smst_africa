@@ -61,7 +61,8 @@ jobs:
           DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
           DATABASE_USER: ${{ secrets.DATABASE_USER }}
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+          DATABASE_PORT: 5432
+          DATABASE_HOST: 127.0.0.1
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           GOOGLE_SECRET_KEY: ${{ secrets.GOOGLE_SECRET_KEY }}
