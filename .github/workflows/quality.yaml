@@ -51,4 +51,4 @@ jobs:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           GOOGLE_SECRET_KEY: ${{ secrets.GOOGLE_SECRET_KEY }}
           CELERY_BROKER_URL: ${{ secrets.CELERY_BROKER_URL }}
-        run: venv/bin/python manage.py test test.models 
+        run: venv/bin/python manage.py test test.test_models 
