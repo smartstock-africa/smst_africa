@@ -9,3 +9,5 @@ migrations/
 scripts/
 node_modules/
 staticfiles/
+backend/
+smst/
