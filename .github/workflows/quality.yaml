@@ -38,4 +38,17 @@ jobs:
         run: venv/bin/pip install -r requirements.txt
 
       - name: Run Tests
+        env:  
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_SECRET_KEY: ${{ secrets.CLOUDINARY_SECRET_KEY }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          DATABASE_USER: ${{ secrets.DATABASE_USER }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          GOOGLE_SECRET_KEY: ${{ secrets.GOOGLE_SECRET_KEY }}
+          CELERY_BROKER_URL: ${{ secrets.CELERY_BROKER_URL }}
         run: venv/bin/python manage.py test test.models 
