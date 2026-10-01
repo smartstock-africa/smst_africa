@@ -1,0 +1,51 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-01 10:25+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: dist/js/account/profile.js:21 dist/min/account/profile.min.js:17
+msgid "Notifications Silenced"
+msgstr "Arifa Zimenyamazishwa"
+
+#: dist/js/account/profile.js:22 dist/min/account/profile.min.js:18
+msgid "You will not receive notifications"
+msgstr "Hutapokea arifa"
+
+#: dist/js/common/functions.js:120 dist/min/common/functions.min.js:84
+msgid "Notifications Denied"
+msgstr "Arifa Zimekataliwa"
+
+#: dist/js/common/functions.js:121 dist/min/common/functions.min.js:85
+msgid "Kindly allow Notifications."
+msgstr "Tafadhali ruhusu arifa."
+
+#: dist/js/common/functions.js:127 dist/min/common/functions.min.js:88
+msgid "Notifications Accepted!"
+msgstr "Arifa Zimekubaliwa"
+
+#: dist/js/common/functions.js:128 dist/min/common/functions.min.js:89
+msgid "Notifications have been allowed."
+msgstr "Arifa Zimeruhusiwa"
+
+#: dist/js/common/functions.js:150
+msgid "Notifications Registered"
+msgstr "Arifa Zimesajiliwa"
+
+#: dist/js/common/functions.js:151
+msgid "You can now receive notifications."
+msgstr "Sasa unaweza kupokea arifa."

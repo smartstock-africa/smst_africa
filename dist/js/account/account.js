@@ -5,6 +5,7 @@ import {
   updateCooldown,
   startCooldown,
   parseDuration,
+  handleHttpError,
 } from '/static/js/common/functions.prod.js';
 import {
   showOutput,
@@ -16,6 +17,14 @@ import {
 document.addEventListener('DOMContentLoaded', function () {
   let csrftoken = $('[name="csrftoken"]')[0].content;
   updateCooldown();
+  $(document).ajaxError(function (event, xhr) {
+    handleHttpError(xhr.status);
+  });
+
+  document.body.addEventListener('htmx:responseError', function (event) {
+    handleHttpError(event.detail.xhr.status);
+  });
+
   $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
     if (localStorage.getItem('login_cooldown_until')) {
       updateCooldown();

@@ -1,4 +1,6 @@
 {% extends 'user/user.html' %}
+{% load static %}
+
 {% block content %}
 <div id="signUpForm" class=" animate__animated animate__fadeInUp">
   <div class="formHeader">
@@ -13,4 +15,7 @@
     </div>
   </div>
 </div>
+{% endblock %}
+{% block script %}
+    <script type="module" src="{% static 'js/account/account.prod.js' %}"></script>
 {% endblock %}

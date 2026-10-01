@@ -66,3 +66,11 @@ def send_link_email(email):
     text_content = "Reset your email! (Use an HTML-compatible email viewer to see full content)"
     subject = "Reset your password"
     send_configured_email(subject, text_content, emails, html_content)
+
+@shared_task
+def send_notification(username, title, body, url="https://user.smartstock.africa"):
+    from backend.models import SmstUserPushSubscription as PushModel
+    from .utils import send_web_push
+    subscription = PushModel.objects.filter(user__username=username)
+    for sub in subscription:
+        send_web_push(sub, title, body, url)

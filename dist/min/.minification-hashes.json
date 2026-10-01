@@ -1,6 +1,7 @@
 {
   "common/notification.js": "b3f5e45611584aa4e764f2d977f6e367768b58b8e90ff9555e02a5e32b563458",
   "frontend/frontend.js": "56704d856ee7c4cde7263e9390db8d6b7478ca52743bb44788b1bd0aab99349b",
-  "account/account.js": "932ae9e9bc37f507920c772bd9f3e81e1609462165fdd553d9c476588c1e0f59",
-  "common/functions.js": "b7d267d7e6b495506d410021bf6888ef4da75d0f409e424bacf57e59461d0a41"
+  "account/account.js": "bb7f6a15d6e695f03c173b535cbeed9e4f4d7070461c6df72a9d8ffb18dcb6bd",
+  "common/functions.js": "2557c2f379f35c1ed833d8fa53604f33987a2a13f67376b63529ad48045fbb5f",
+  "account/profile.js": "cea861e37343934a58bcde563f60d5a1a44b27a179068b582179d4199a073a3a"
 }

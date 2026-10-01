@@ -194,8 +194,6 @@ a {
 
 .mainContent {
   margin: 24px 0px;
-  border-radius: 12px;
-  overflow: hidden;
   flex-direction: column;
   gap: 8px;
 }
@@ -205,9 +203,12 @@ a {
   padding: var(--spacing);
   border-radius: 8px;
   font-family: var(--Figtree);
+  user-select: none;
+  cursor: pointer;
 }
 
-.contentText {
+.contentText,
+.notificationText {
   flex: 1;
   font-size: var(--base-font-size);
   font-weight: 600;
@@ -221,6 +222,13 @@ a {
 
 .contentIcon {
   padding: 4px;
+}
+.notificationSetting {
+  padding: 12px;
+  gap: 1rem;
+  font-family: var(--Figtree);
+  background: white;
+  border-radius: 12px;
 }
 
 @media (max-width: 768px) {
@@ -238,6 +246,7 @@ a {
 
   .pageHolder {
     margin: 0px auto;
+    width: calc(100vw - 2rem);
   }
 
   .pageHeader {
@@ -245,5 +254,19 @@ a {
   }
   #signUpForm {
     margin-top: 20vh;
+  }
+
+  .contentText {
+    font-size: var(--small-font-size);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .content:hover {
+    box-shadow: var(--small-shadow);
+  }
+
+  .content:active {
+    box-shadow: none;
   }
 }

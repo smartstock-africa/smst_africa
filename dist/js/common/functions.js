@@ -100,3 +100,107 @@ export function updateCooldown() {
     Timeout = setTimeout(updateCooldown, 60000);
   }
 }
+
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+
+  return Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)));
+}
+
+export async function enableNotifications() {
+  const VAPID_PUBLIC_KEY = $('#vapid_public_key').val();
+  const permission = await Notification.requestPermission();
+  let csrftoken = $('[name="csrftoken"]')[0].content;
+  if (permission !== 'granted') {
+    showErrorMessage(
+      gettext('Notifications Denied'),
+      gettext('Kindly allow Notifications.')
+    );
+    return;
+  }
+
+  showSuccessMessage(
+    gettext('Notifications Accepted!'),
+    gettext('Notifications have been allowed.')
+  );
+
+  const registration = await navigator.serviceWorker.ready;
+
+  const subscription = await registration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
+  });
+
+  // We'll send this to Django next
+
+  $.ajax({
+    type: 'POST',
+    url: '?action=activate_notifications',
+    headers: {
+      'X-CSRFToken': csrftoken,
+    },
+    data: JSON.stringify(subscription.toJSON()),
+    success: function (response) {
+      if (response.status) {
+        showSuccessMessage(
+          gettext('Notifications Registered'),
+          gettext('You can now receive notifications.')
+        );
+      } else {
+        showErrorMessage('Notifications Error', 'Kindly Try again');
+      }
+    },
+  });
+}
+
+export async function unsubscribeNotifications(){
+  const registration = await navigator.serviceWorker.ready;
+  let csrftoken = $('[name="csrftoken"]')[0].content;
+
+const subscription =
+  await registration.pushManager.getSubscription();
+
+if (subscription) {
+  const success = await subscription.unsubscribe();
+    
+  $.ajax({
+    type: 'POST',
+    url: '?action=silence_notifications',
+    headers: {
+      'X-CSRFToken': csrftoken
+    },
+    data: JSON.stringify({endpoint:subscription.endpoint})
+  })
+}
+
+}
+
+export function handleHttpError(status) {
+  switch (status) {
+    case 401:
+      window.location.href = '/login/';
+      break;
+
+    case 403:
+      showErrorMessage(
+        'Not Authenticated',
+        'You don\'t have permission to do that.'
+      );
+      break;
+
+    case 404:
+      showErrorMessage('Not Found', 'The requested resource was not found.');
+      break;
+
+    case 500:
+      showErrorMessage(
+        'An Error Occurred',
+        'Server error. Please try again later.'
+      );
+      break;
+  }
+}

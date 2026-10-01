@@ -1,6 +1,7 @@
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
-
+import logging
+logger = logging.getLogger('smst')
 def check_email(email):
     try:
         validate_email(email)
@@ -48,3 +49,39 @@ def confirm_user(email):
 
 def confirm_social(email):
     return SmstUser.objects.filter(email=email, social_acc=True).exists()
+
+import json
+from django.conf import settings
+from pywebpush import webpush, WebPushException
+
+def send_web_push(subscription, title, body, url):
+    subscription_info = {
+        "endpoint": subscription.endpoint,
+        "keys": {
+            'p256dh': subscription.p256dh,
+            'auth': subscription.auth,
+        }
+    }
+    
+    payload = json.dumps({
+        "title": title,
+        "body": body,
+        "icon": 'https://res.cloudinary.com/di3bh4qsl/image/upload/v1780517418/latest_smst_logo_1_vrlvwa.png',
+        "badge": 'https://res.cloudinary.com/di3bh4qsl/image/upload/v1790847358/smst_logo_badge_ix7iyn.png',
+        "data": {
+            "url": url
+        }
+    })
+    
+    try:
+        webpush(
+            subscription_info=subscription_info,
+            data=payload,
+            vapid_private_key = settings.VAPID_PRIVATE_KEY,
+            vapid_claims={
+                'sub': settings.VAPID_EMAIL
+            }
+        )
+    except WebPushException as e:
+        logger.critical(f'Web Push Sub Sending Error {e}')
+        

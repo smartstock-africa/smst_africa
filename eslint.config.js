@@ -11,7 +11,9 @@ export default [
         clearTimeout: 'readonly',
         window: 'readonly',
         localStorage: 'readonly',
-        URLSearchParams: 'readonly'
+        URLSearchParams: 'readonly',
+        Notification: 'readonly',
+        gettext: 'readonly'
       }
     },
 

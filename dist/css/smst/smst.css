@@ -25,11 +25,9 @@
   --Jost: Jost, sans-serif;
   --BonaNova: BonaNova, serif;
   --Inconsolata: Inconsolata, serif;
-  --gradient: linear-gradient(
-    180deg,
-    var(--primary-color) 0%,
-    var(--secondary-color) 100%
-  );
+  --gradient: linear-gradient(180deg,
+      var(--primary-color) 0%,
+      var(--secondary-color) 100%);
   --white-color-text: #eeeeee;
   --black-color-text: #010101;
   --base-font-value: 20px;
@@ -37,34 +35,19 @@
   --base-line-height: 1.41;
   --ratio: 1.618;
   --small-font-size: calc(var(--base-font-value) / var(--ratio));
-  --small-line-height: calc(
-    var(--base-line-height) -
-      (var(--small-font-size) - var(--base-font-value)) / 100
-  );
+  --small-line-height: calc(var(--base-line-height) - (var(--small-font-size) - var(--base-font-value)) / 100);
   --tiny-font-size: calc(var(--small-font-size) / var(--ratio));
-  --tiny-line-height: calc(
-    var(--base-line-height) - (var(--tiny-font-size) - var(--base-font-value)) /
-      100
-  );
+  --tiny-line-height: calc(var(--base-line-height) - (var(--tiny-font-size) - var(--base-font-value)) / 100);
 
   --normal-font-size: calc(var(--base-font-value));
   --large-font-size: calc(var(--normal-font-size) * var(--ratio));
-  --large-line-height: calc(
-    var(--base-line-height) -
-      (var(--large-font-size) - var(--base-font-value)) / 100
-  );
+  --large-line-height: calc(var(--base-line-height) - (var(--large-font-size) - var(--base-font-value)) / 100);
 
   --xl-font-size: calc(var(--large-font-size) * var(--ratio));
-  --xl-line-height: calc(
-    var(--base-line-height) - (var(--xl-font-size) - var(--base-font-value)) /
-      100
-  );
+  --xl-line-height: calc(var(--base-line-height) - (var(--xl-font-size) - var(--base-font-value)) / 100);
 
   --2xl-font-size: calc(var(--xl-font-size) * var(--ratio));
-  --2xl-line-height: calc(
-    var(--base-line-height) - (var(--2xl-font-size) - var(--base-font-value)) /
-      100
-  );
+  --2xl-line-height: calc(var(--base-line-height) - (var(--2xl-font-size) - var(--base-font-value)) / 100);
   --spacing: min(12px, 2%);
 
   --font-weight-bold: 500;
@@ -73,7 +56,8 @@
 
   --shadow:
     0px 4px 6px -4px rgba(0, 0, 0, 0.15), 0px 10px 15px 5px rgba(0, 0, 0, 0.15);
-
+  --small-shadow:
+    0px 4px 6px -4px rgba(0, 0, 0, 0.15), 0px 5px 10px 1px rgba(0, 0, 0, 0.15);
   --positive-color-background: #4caf50;
   --negative-color-background: #b20000;
   --warning-color-background: #963600;
@@ -343,6 +327,7 @@ input.negativeInput {
 .feedback-icon.loading .loading-feedback {
   opacity: 1;
 }
+
 .feedback-icon.negative .negative-feedback {
   opacity: 1;
 }
@@ -381,6 +366,78 @@ input.negativeInput {
   color: var(--negative-color-background);
 }
 
+.checkbox {
+  display: none;
+}
+
+.slider {
+  width: 60px;
+  height: 20px;
+  background-color: var(--secondary-color)  ;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  transition: .3s;
+  box-shadow: 0 0 10px 0 rgb(0, 0, 0, 0.25) inset;
+  cursor: pointer;
+}
+
+.slider::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  transform: translateX(-30px);
+  border-radius: 20px;
+  transition: .3s;
+  box-shadow: 0 0 10px 3px rgb(0, 0, 0, 0.25);
+}
+
+.checkbox:checked~.slider::before {
+  transform: translateX(30px);
+  box-shadow: 0 0 10px 3px rgb(0, 0, 0, 0.25);
+}
+
+.checkbox:checked~.slider {
+  background-color: var(--positive-color-background);
+}
+
+.checkbox:active~.slider::before {
+  transform: translate(0);
+}
+
+.selectInput{
+  position: relative;
+}
+
+select{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  border:none;
+  border-bottom: 1px solid var(--primary-color);
+  padding: 4px 8px;
+  font-family: var(--Figtree);
+  letter-spacing: 0.2px;
+  padding-right: 24px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.selectDropDownIcon{
+  position: absolute;
+  right: 2px;
+  top: 0;
+  height: 100%; 
+}
+
+select:active{
+  background: transparent;
+}
+
 @media (hover: hover) and (pointer: fine) {
   button:hover::before {
     background: rgba(255, 255, 255, 0.15);
@@ -395,6 +452,7 @@ button:active::before {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -404,6 +462,7 @@ button:active::before {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(-360deg);
   }

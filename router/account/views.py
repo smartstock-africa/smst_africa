@@ -5,6 +5,10 @@ from django.template.loader import render_to_string
 from django.shortcuts import redirect
 import json
 from django.contrib.auth import authenticate, login
+from django.conf import settings
+from django_ratelimit.decorators import ratelimit
+
+@ratelimit(key="post:email", rate="50/m")
 def user(request):
     action = request.GET.get('action')
     user = request.user
@@ -135,5 +139,23 @@ def profile(request):
     user = request.user
     if not user.username:
         return render(request, 'user/profile/username.html')
+    page = request.GET.get('page')
+    if page:
+        return render(request, f'user/profile/pages/minipages/{page}.html')
     
-    return render(request, 'user/profile/page.html')
+    action = request.GET.get('action')
+    if action == "activate_notifications":
+        from core.account.account import enable_notifications
+        data = json.loads(request.body)
+        endpoint = data.get('endpoint')
+        keys = data.get('keys')
+        notifications = enable_notifications(endpoint, keys['p256dh'], keys['auth'],request.user.id)
+        return JsonResponse({
+            'status': notifications
+        })
+    if action == "silence_notifications":
+        data = json.loads(request.body)
+        endpoint = data.get('endpoint')
+        
+    return render(request, 'user/profile/page.html' ,{'vapid_public_key': settings.PROCESSED_VAPID_PUBLIC_KEY})
+

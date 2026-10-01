@@ -1,13 +1,25 @@
 from dataclasses import dataclass
-from backend.models import SmstUser
+from backend.models import SmstUser, SmstUserPushSubscription as PushModel
 from django.contrib.auth.hashers import check_password, make_password
 from django.db import transaction
+import logging
+from django.utils.translation import gettext as _
+
+logger = logging.getLogger('smst')
+
 @dataclass
 class Account:
     username: str
     account_id: int | None = None
     email: str | None = None
-        
+
+@dataclass
+class PushSub:
+    endpoint: str
+    p256dh: str
+    auth: str
+    user: int    
+
 class AccountRepository:
     def check_username(self, account:Account)->str:
         user = SmstUser.objects.filter(username=account.username)
@@ -45,6 +57,26 @@ class AccountRepository:
         except:
             return False
     
+    @transaction.atomic
+    def enable_notifications(self, pushSub:PushSub)->bool:
+        from core.tasks import send_notification
+        try:
+            user = SmstUser.objects.get(id=pushSub.user)
+            PushModel.objects.get_or_create(
+                user=user,
+                endpoint=pushSub.endpoint,
+                defaults={
+                    'p256dh': pushSub.p256dh,
+                    'auth': pushSub.auth
+                }
+            )
+            send_notification.delay(user.username, _('Notification'), _('Here is a message'))
+            return True
+        except Exception as e:
+            logger.critical(f'PushSub Model Error {e}')
+            return False
+            
+    
 class BaseAccount:
     def __init__(self):
         self.repo = AccountRepository()
@@ -78,3 +110,16 @@ class ChangePassword(BaseAccount):
 
 def change_password(email, new_password):
     return ChangePassword().execute(email, new_password)
+
+class EnableNotifications(BaseAccount):
+    def execute(self, endpoint, p256dh, auth, user):
+        pushSub = PushSub(
+            endpoint=endpoint,
+            p256dh=p256dh,
+            auth=auth,
+            user=user
+        )
+        return self.repo.enable_notifications(pushSub)
+    
+def enable_notifications(endpoint, p256dh, auth, user):
+    return EnableNotifications().execute(endpoint, p256dh, auth, user)
