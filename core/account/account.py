@@ -26,6 +26,10 @@ class AccountRepository:
         if user:
             return "exists"
         return "valid"
+    
+    def check_notification(self, user):
+        return 
+    
     @transaction.atomic
     def change_username(self, account:Account)->bool:
         try:
@@ -123,3 +127,10 @@ class EnableNotifications(BaseAccount):
     
 def enable_notifications(endpoint, p256dh, auth, user):
     return EnableNotifications().execute(endpoint, p256dh, auth, user)
+
+class CheckNotification(BaseAccount):
+    def execute(self, user, endpoint):
+        return self.repo.check_notification(user, endpoint)
+    
+def check_notification(user, endpoint):
+    return CheckNotification().execute(user, endpoint)

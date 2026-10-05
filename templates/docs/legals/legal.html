@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block legalTitle %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'frontend/frontend.min.css' %}" />
+    {% include 'smst/smst_header.html' %}
+</head>
+<body>
+    {% include 'snippets/theme/shader.html' %} 
+    {% include 'snippets/frontend/header.html' %}
+    <main>
+        <section>
+            <div id="mainContent">
+                <div id="legalDocumentationHolder" class="flex">
+                    <div class="legalDocumentation">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script></script>
+</body>
+</html>

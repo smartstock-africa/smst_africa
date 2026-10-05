@@ -61,6 +61,7 @@
   --positive-color-background: #4caf50;
   --negative-color-background: #b20000;
   --warning-color-background: #963600;
+  --vh: 100dvh;
 }
 
 * {
@@ -177,7 +178,7 @@ svg {
 }
 
 .shader {
-  height: 100dvh;
+  height: var(--vh);
   width: 100vw;
   background: var(--gradient);
   pointer-events: none;
@@ -196,7 +197,7 @@ svg {
   top: 0;
   left: 0;
   z-index: 999;
-  height: 100dvh;
+  height: var(--vh);
   width: 100vw;
   display: flex;
   overflow: hidden;
@@ -244,9 +245,10 @@ svg {
 }
 
 h1 {
-  font-family: var(--BonaNova);
+  font-family: var(--Jost);
   font-size: var(--large-font-size);
-  font-weight: var(--font-weight-heavy);
+  font-weight: 500;
+  letter-spacing: 1px;
 }
 
 button {
@@ -465,5 +467,12 @@ button:active::before {
 
   100% {
     transform: rotate(-360deg);
+  }
+}
+
+@media (max-width:768px){
+  h1{
+  font-size: var(--normal-font-size);
+
   }
 }

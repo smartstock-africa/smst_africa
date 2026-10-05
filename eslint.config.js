@@ -13,7 +13,9 @@ export default [
         localStorage: 'readonly',
         URLSearchParams: 'readonly',
         Notification: 'readonly',
-        gettext: 'readonly'
+        gettext: 'readonly',
+        navigator: 'readonly',
+        NProgress: 'readonly'
       }
     },
 

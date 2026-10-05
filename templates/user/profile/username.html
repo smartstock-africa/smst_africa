@@ -1,5 +1,5 @@
 {% extends 'user/user.html' %}
-
+{% load static %}
 {% block content %}
 <div class="form auto-margin">
 <div class="profileForm">
@@ -38,4 +38,9 @@
     </div>
 </div>
 </div>
+{% endblock %}
+
+
+{% block script %}
+    <script type="module" src="{% static 'js/account/account.prod.js' %}"></script>
 {% endblock %}

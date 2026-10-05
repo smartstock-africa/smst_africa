@@ -1,0 +1,41 @@
+{% extends 'user/profile/pages/pageHolder.html' %}
+{% load i18n %}
+{% block content %}
+<div class="personalInformationSector">
+    <div class="personalInfoHolder flex">
+        <div class="personalInfoBox">
+            <div class="personalInfoTitle">
+                <span>{% translate 'First Name' %}</span>
+            </div>
+            <div class="personalInfoValue">
+                <span>{{request.user.first_name}}</span>
+            </div>
+        </div>
+        <div class="personalInfoBox">
+            <div class="personalInfoTitle">
+                <span>{% translate 'Last Name' %}</span>
+            </div>
+            <div class="personalInfoValue">
+                {% translate "Empty" as empty_text %}
+                <span>{{request.user.last_name|default:empty_text}}</span>
+            </div>
+        </div>
+        <div class="personalInfoBox">
+            <div class="personalInfoTitle">
+                <span>{% translate 'Smst Username' %}</span>
+            </div>
+            <div class="personalInfoValue">
+                <span>{{request.user.username}}</span>
+            </div>
+        </div>
+        <div class="personalInfoBox">
+            <div class="personalInfoTitle">
+                <span>{% translate 'Email' %}</span>
+            </div>
+            <div class="personalInfoValue">
+                <span>{{request.user.email}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

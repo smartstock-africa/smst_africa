@@ -42,3 +42,6 @@ def user_access(request):
             "success_title": success_title,
             "success_content": success_content
         })
+
+def documentation_access(request, doc):
+    return render(request, 'docs/legals/legal/privacy_policy.html')

@@ -3,5 +3,6 @@ from .views import *
 urlpatterns = [
     path("", frontend, name="frontend"),
     path("<snippet>", snippet_access, name="access_snippets"),
-    path('users/', user_access, name="user_access")
+    path('users/', user_access, name="user_access"),
+    path('docs/<doc>', documentation_access, name="docs")
 ]

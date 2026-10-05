@@ -157,26 +157,24 @@ export async function enableNotifications() {
   });
 }
 
-export async function unsubscribeNotifications(){
+export async function unsubscribeNotifications() {
   const registration = await navigator.serviceWorker.ready;
   let csrftoken = $('[name="csrftoken"]')[0].content;
 
-const subscription =
-  await registration.pushManager.getSubscription();
+  const subscription = await registration.pushManager.getSubscription();
 
-if (subscription) {
-  const success = await subscription.unsubscribe();
-    
-  $.ajax({
-    type: 'POST',
-    url: '?action=silence_notifications',
-    headers: {
-      'X-CSRFToken': csrftoken
-    },
-    data: JSON.stringify({endpoint:subscription.endpoint})
-  })
-}
+  if (subscription) {
+    await subscription.unsubscribe();
 
+    $.ajax({
+      type: 'POST',
+      url: '?action=silence_notifications',
+      headers: {
+        'X-CSRFToken': csrftoken,
+      },
+      data: JSON.stringify({ endpoint: subscription.endpoint }),
+    });
+  }
 }
 
 export function handleHttpError(status) {
@@ -202,5 +200,16 @@ export function handleHttpError(status) {
         'Server error. Please try again later.'
       );
       break;
+  }
+}
+
+export function checkInput() {
+  if ($('.switchInput').length) {
+    $('.switchInput').each(function () {
+      let endpoint = $(this).data('endpoint');
+      if (endpoint) {
+        $(this).find('input[type="checkbox"]').prop('checked', true);
+      }
+    });
   }
 }

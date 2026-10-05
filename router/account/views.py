@@ -141,7 +141,11 @@ def profile(request):
         return render(request, 'user/profile/username.html')
     page = request.GET.get('page')
     if page:
-        return render(request, f'user/profile/pages/minipages/{page}.html')
+        data = None
+        if page == "notifications":
+            endpoint = request.session.get('endpoint')
+            data = {'pager': endpoint}
+        return render(request, f'user/profile/pages/minipages/{page}.html', data)
     
     action = request.GET.get('action')
     if action == "activate_notifications":
@@ -150,6 +154,8 @@ def profile(request):
         endpoint = data.get('endpoint')
         keys = data.get('keys')
         notifications = enable_notifications(endpoint, keys['p256dh'], keys['auth'],request.user.id)
+        if notifications:
+            request.session['endpoint']=endpoint
         return JsonResponse({
             'status': notifications
         })

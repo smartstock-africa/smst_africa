@@ -31,6 +31,21 @@ document.addEventListener('DOMContentLoaded', function () {
       jqXHR.abort();
     }
   });
+
+  $(document).ajaxStart(function () {
+    NProgress.start();
+  });
+  $(document).ajaxComplete(function () {
+    NProgress.done();
+  });
+
+  $(document).on('htmx:beforeRequest', function () {
+    NProgress.start();
+  });
+  $(document).on('htmx:afterSwap', function () {
+    NProgress.done();
+  });
+
   $('main').on(
     'input',
     '#username',
@@ -326,4 +341,10 @@ document.addEventListener('DOMContentLoaded', function () {
       clearOutput();
     })
   );
+  window.visualViewport?.addEventListener('resize', () => {
+    document.documentElement.style.setProperty(
+      '--vh',
+      `${window.visualViewport.height}px`
+    );
+  });
 });

@@ -283,6 +283,21 @@ details p {
   gap: 12px;
 }
 
+#legalDocumentationHolder{
+  position: absolute;
+  width: 100%;
+}
+
+.legalDocumentation{
+  padding: 24px;
+  background: white;
+  width: 50%;
+  margin: auto;
+  border-radius: 12px;
+  box-shadow: var(--small-shadow);
+}
+
+
 @media (max-width: 768px) {
   .pricing-container {
     grid-template-columns: 1fr;
