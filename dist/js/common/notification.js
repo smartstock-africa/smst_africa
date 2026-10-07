@@ -149,5 +149,5 @@ export function clearOutput() {
   let $feedback = $('input:focus').parent().find('.feedback-icon');
   $outputHolder.empty();
   $feedback.removeClass('loading negative').addClass('positive');
-  $('#formButton').prop('disabled', false);
+  $('#formButton, button').prop('disabled', false);
 }

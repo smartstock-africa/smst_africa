@@ -1,20 +1,19 @@
-<div class="editingHolder">
-    <div class="editingContainer animate__animated animate__fadeInRight">
-        <div class="editingHeader">
-            <h1>Edit your {{edit_name}}</h1>
-        </div>
-        <div class="editingInputHolder">
-            <div class="inputHolder">
-                <input type="text" id="{{input_id}}" value="{{input_value}}" data-edit-name="{{edit_name}}">
-                {% include 'snippets/attachables/feedback_icon.html' %}
-            </div>
-        </div>
-        {% include 'snippets/notifications/formOutput.html' %}
+{% extends 'user/profile/pages/dynamicPageHolder.html' %}
 
-        <div class="editingButtonHolder">
-            <div class="buttonHolder flex">
-                <button>Save Changes</button>
-            </div>
-        </div>
+{% block content %}
+<div class="editingHeader">
+    <h1>Edit your {{edit_name}}</h1>
+</div>
+<div class="editingInputHolder">
+    <div class="inputHolder">
+        <input type="text" id="{{input_id}}" value="{{input_value}}" data-edit-name="{{edit_name}}">
+        {% include 'snippets/attachables/feedback_icon.html' %}
     </div>
 </div>
+{% include 'snippets/notifications/formOutput.html' %}
+<div class="editingButtonHolder">
+    <div class="buttonHolder flex">
+        <button>Save Changes</button>
+    </div>
+</div>
+{% endblock %}

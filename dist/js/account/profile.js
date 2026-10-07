@@ -80,26 +80,96 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    $.ajax({
-      type: 'POST',
-      headers: {
-        'X-CSRFToken': csrftoken,
-      },
-      url: '?action=edit_personal_info',
-      data: JSON.stringify({
-        editName: inputId,
-        editValue: value,
-      }),
-      success: function (response) {
-        if (response.status) {
-          showSuccessMessage(
-            'Details Changed',
-            `You have updated your ${editName}`
+    if (editName && editName.length) {
+      $.ajax({
+        type: 'POST',
+        headers: {
+          'X-CSRFToken': csrftoken,
+        },
+        url: '?action=edit_personal_info',
+        data: JSON.stringify({
+          editName: inputId,
+          editValue: value,
+        }),
+        success: function (response) {
+          if (response.status) {
+            showSuccessMessage(
+              'Details Changed',
+              `You have updated your ${editName}`
+            );
+            return;
+          }
+          showErrorMessage(
+            'Details Not Changed',
+            'An error occurred try again.'
           );
-          return;
-        }
-        showErrorMessage('Details Not Changed', 'An error occurred try again.');
-      },
-    });
+        },
+      });
+    }
+
+    if (inputId == 'login_password') {
+      $.ajax({
+        type: 'POST',
+        url: '?action=confirm_password',
+        headers: {
+          'X-CSRFToken': csrftoken,
+        },
+        data: JSON.stringify({
+          password: value,
+        }),
+        success: function (response) {
+          if (response.status) {
+            showSuccessMessage(
+              'Password Confirmed',
+              'Enter your new password to change it.'
+            );
+            $('.mainContent').empty().append(response.html);
+            return;
+          } else {
+            if (response.logout) {
+              showErrorMessage(
+                'Logging you out',
+                'Too many password attempts.'
+              );
+              NProgress.start();
+              $('button').prop('disabled', true);
+              setTimeout(() => {
+                window.location.reload();
+              }, 2000);
+            } else {
+              showErrorMessage(
+                'Password Failed',
+                'You will be logged out after 3 incorrect attempts.'
+              );
+            }
+          }
+        },
+      });
+    }
+  });
+  let confirmation = false;
+  $('main').on('click', '.logout_content_button', function () {
+    if (!confirmation) {
+      showErrorMessage('Are you sure?', 'Kindly click Logout again to confirm');
+      confirmation = true;
+    } else {
+      $.ajax({
+        type: 'POST',
+        headers: {
+          'X-CSRFToken': csrftoken,
+        },
+        url: '?action=logout',
+        success: function (response) {
+          if (response.status) {
+            showSuccessMessage('Logged Out', 'Refreshing your page');
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+          } else {
+            showErrorMessage('Could Not Log Out', 'Kindly Try again.');
+          }
+        },
+      });
+    }
   });
 });

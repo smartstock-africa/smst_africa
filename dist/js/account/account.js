@@ -1,7 +1,6 @@
 import {
   debounce,
-  checkEmail,
-  validatePassword,
+  checkEmail,git add
   updateCooldown,
   startCooldown,
   parseDuration,
@@ -282,33 +281,4 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   });
-
-  $('main').on(
-    'input',
-    '#password1, #reppassword1',
-    debounce(function (e) {
-      let value = e.target.value.trim();
-      $(this).val(value);
-      const error = validatePassword(value);
-      if (error) {
-        showOutput(error);
-        return;
-      }
-      clearOutput();
-    })
-  );
-  $('main').on(
-    'input',
-    '#password2, #reppassword2',
-    debounce(function (e) {
-      let value = e.target.value.trim();
-      let passwordField =
-        e.target.id === 'password2' ? '#password1' : '#reppassword1';
-      if (value !== $(passwordField).val()) {
-        showOutput('Passwords do not match.');
-        return;
-      }
-      clearOutput();
-    })
-  );
 });

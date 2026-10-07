@@ -30,6 +30,9 @@ class AccountRepository:
     def check_notification(self, user):
         return 
     
+    def check_password(self, user_id, password):
+        user = SmstUser.objects.filter(id=user_id).first()
+        return check_password(password, user.password)
     @transaction.atomic
     def change_username(self, account:Account)->bool:
         try:
@@ -150,3 +153,10 @@ class ChangePersonalInfo(BaseAccount):
 
 def change_personal_info(user_id, info_field, new_value):
     return ChangePersonalInfo().execute(user_id, info_field, new_value)
+
+class CheckPassword(BaseAccount):
+    def execute(self, user_id, password):
+        return self.repo.check_password(user_id, password)
+
+def check_smst_password(user_id, password):
+    return CheckPassword().execute(user_id, password)

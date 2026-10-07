@@ -228,12 +228,14 @@ a {
 .contentIcon {
   padding: 4px;
 }
-.notificationSetting {
+.notificationSetting,
+.securitySetting {
   padding: 12px;
   gap: 1rem;
   font-family: var(--Figtree);
   background: var(--white-background);
   border-radius: 12px;
+  user-select: none;
 }
 
 .personalInfoBox {
@@ -282,6 +284,22 @@ a {
 .buttonHolder button {
   width: 100%;
   border-radius: 4px;
+}
+
+.logout_content_button {
+  background: var(--negative-color-background);
+  color: var(--white-color-text);
+  width: 50%;
+  margin: auto;
+  margin-top: 12px;
+}
+
+.logout_content_button .contentText {
+  flex: unset;
+}
+
+.editingContainer {
+  width: clamp(300px, 75vw, 500px);
 }
 
 @media (max-width: 768px) {

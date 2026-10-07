@@ -7,6 +7,8 @@ import json
 from django.contrib.auth import authenticate, login
 from django.conf import settings
 from django_ratelimit.decorators import ratelimit
+from django.contrib.auth import logout
+from django.core.cache import cache
 
 @ratelimit(key="post:email", rate="50/m")
 def user(request):
@@ -157,7 +159,7 @@ def profile(request):
         data = json.loads(request.body)
         endpoint = data.get('endpoint')
         keys = data.get('keys')
-        notifications = enable_notifications(endpoint, keys['p256dh'], keys['auth'],request.user.id)
+        notifications = enable_notifications(endpoint, keys['p256dh'], keys['auth'],user.id)
         if notifications:
             request.session['endpoint']=endpoint
         return JsonResponse({
@@ -177,10 +179,35 @@ def profile(request):
         data = json.loads(request.body)
         edit_name = data.get('editName')
         edit_value = data.get('editValue')
-        change = change_personal_info(request.user.id, edit_name, edit_value)
+        change = change_personal_info(user.id, edit_name, edit_value)
         return JsonResponse({
             'status': change
         })
+    if action == "change_password":
+        return render(request, 'user/profile/pages/verification/password.html')
+    if action == "confirm_password":
+        from core.account.account import check_smst_password
+        data = json.loads(request.body)
+        password = data.get('password')
+        cache_key = f'incorrect_login_attempts_{user.id}'
+        confirmation = check_smst_password(user.id, password)
+        if confirmation:
+            cache.delete(cache_key)
+            return JsonResponse({
+                'status': confirmation,
+                'html': render_to_string('user/profile/pages/verification/password_change.html')
+            })
+        else:
+            attempts = cache.get(cache_key) or 0
+            if attempts >=3:
+                logout(request)
+                return JsonResponse({'status': confirmation, 'logout': True})
+            attempts += 1
+            cache.set(cache_key, attempts, timeout=3600)
+        return JsonResponse({'status': confirmation})
+    if action == "logout":
+        logout(request)
+        return JsonResponse({'status': True})
     return render(request, 'user/profile/page.html' ,{'vapid_public_key': settings.PROCESSED_VAPID_PUBLIC_KEY})
 
 @smst_logged_in

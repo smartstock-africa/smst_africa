@@ -186,7 +186,7 @@ export function handleHttpError(status) {
     case 403:
       showErrorMessage(
         'Not Authenticated',
-        'You don\'t have permission to do that.'
+        "You don't have permission to do that."
       );
       break;
 

@@ -34,7 +34,12 @@ class SmstAccountTestCase(TestCase):
         test_user.refresh_from_db()
         self.assertEqual(changed, True)
         self.assertEqual(test_user.username, 'testcase.smst.changed')
-        
+    
+    def test_check_password(self):
+        from core.account.account import check_smst_password
+        test_user = SmstUser.objects.get(email="testcase.smst@gmail.com")
+        confirmation = check_smst_password(test_user.id,'testcase123')
+        self.assertEqual(confirmation, True)
         
     
     # SAVE PASSWORD USING MAKE PASSWORD AND CHECK USING CHECK PASSWORD
