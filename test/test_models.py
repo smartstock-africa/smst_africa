@@ -24,6 +24,17 @@ class SmstAccountTestCase(TestCase):
         
     def test_check_username(self):
         self.assertEqual(check_username('testcase.smst'), 'exists')
+    
+    def test_change_username(self):
+        from core.account.account import change_personal_info
+        test_user = SmstUser.objects.get(email="testcase.smst@gmail.com")
+        user_info = 'username'
+        new_value = "testcase.smst.changed"
+        changed = change_personal_info(test_user.id, user_info, new_value)
+        test_user.refresh_from_db()
+        self.assertEqual(changed, True)
+        self.assertEqual(test_user.username, 'testcase.smst.changed')
+        
         
     
     # SAVE PASSWORD USING MAKE PASSWORD AND CHECK USING CHECK PASSWORD

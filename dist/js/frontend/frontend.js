@@ -11,18 +11,18 @@ document.addEventListener('DOMContentLoaded', function () {
       $('.mobileHeaderContent')
         .removeClass('animate__fadeInDown')
         .addClass('animate__fadeOutUp');
-      $('.headerLogoText').toggleClass('darken', false);
+      $('#header').toggleClass('darken', false);
     } else {
       $('.mobileHeaderContent')
         .removeClass('animate__fadeOutUp')
         .addClass('animate__fadeInDown');
-      $('.headerLogoText').toggleClass('darken', true);
+      $('#header').toggleClass('darken', true);
     }
   });
 
   $('.mobileHeaderContent').on('click', function () {
     $(this).removeClass('animate__fadeInDown').addClass('animate__fadeOutUp');
-    $('.headerLogoText').toggleClass('darken', false);
+    $('#header').toggleClass('darken', false);
   });
 
   $('.newsletter-button').on('click', function () {

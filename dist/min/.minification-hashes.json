@@ -1,7 +1,9 @@
 {
-  "common/notification.js": "b3f5e45611584aa4e764f2d977f6e367768b58b8e90ff9555e02a5e32b563458",
-  "frontend/frontend.js": "56704d856ee7c4cde7263e9390db8d6b7478ca52743bb44788b1bd0aab99349b",
-  "account/account.js": "db16226b1e5f3684aae6cb8a87fecbec1529cd82e6dd86915d8d9354e8b57862",
-  "common/functions.js": "8c7654100ad26c1ec2c21d7d066fd3d4c6261dff9c17398a55aa1e31ca805e65",
-  "account/profile.js": "90d254da975c0c1a50f7fdcc5442108057879ade993bf2005f7b25eae3cc9c9b"
+  "common/notification.js": "49defe3c1a39a0a100604e5b9fd5ce7fd5be62eaa2387227e86010ae4598e7e9",
+  "frontend/frontend.js": "e2931d2fb0ea70246f161239e96e6242a5bdd8e0045af3efdc80f2b7505989e1",
+  "account/account.js": "7aabf10d2724275be3cb466d654ae3062acf321ea29fbbb4a03d64eee9a323d5",
+  "common/functions.js": "51fdc86740e0da6c1ea3ae2f3e31f63bd1249d5f0e522fef6e1345cc94a4dbde",
+  "account/profile.js": "5c328793f38c55b1004e8daffc6b2cdfeafe1ca5a1ba84047dd089ff1488c55c",
+  "cake/cake.js": "9c788c453c7bb681d9ecf7fee8e9fa9b60a23b673cc0d25966568e75aa1ddf92",
+  "common/dom_loaded.js": "7c2d3450a3e7bfd045d54b0121eacddb7632816a9e7b2410b5495c4ab085f613"
 }

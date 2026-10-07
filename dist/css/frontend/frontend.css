@@ -113,8 +113,9 @@ details p {
 }
 
 #footer {
-  background: var(--secondary-color);
+  background: var(--white-background);
   padding: var(--spacing);
+  margin-top: 50px;
 }
 
 .footer-logo {
@@ -160,7 +161,7 @@ details p {
 }
 
 .social-icon {
-  background: white;
+  background: var(--white-background);
   border-radius: 12px;
   padding: 4px;
 }
@@ -196,8 +197,12 @@ details p {
   pointer-events: all;
 }
 
-.darken {
+#header.darken .headerLogoText {
   color: var(--black-color-text);
+}
+
+#header.darken svg path {
+  stroke: var(--black-color-text) !important;
 }
 
 .headerContent {
@@ -283,20 +288,86 @@ details p {
   gap: 12px;
 }
 
-#legalDocumentationHolder{
-  position: absolute;
+#legalDocumentationHolder {
   width: 100%;
 }
 
-.legalDocumentation{
-  padding: 24px;
-  background: white;
+.legalDocumentation {
+  background: var(--white-background);
   width: 50%;
   margin: auto;
   border-radius: 12px;
   box-shadow: var(--small-shadow);
+  display: grid;
+  grid-template-columns: fit-content(250px) 1fr;
 }
 
+.documentation_toc {
+  font-family: var(--Figtree);
+  padding: 24px 12px;
+  user-select: none;
+}
+
+.toc_contents {
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 500;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.documentation_holder {
+  padding: 16px 0px;
+  margin: auto;
+  width: 30vw;
+}
+
+.documentation_timeline {
+  font-family: var(--Figtree);
+  font-size: var(--small-font-size);
+  opacity: 0.6;
+}
+
+.subSection {
+  margin: 24px 8px;
+}
+
+.subSectionHeader {
+  font-size: var(--base-font-value);
+  font-family: var(--Jost);
+  font-weight: 500;
+}
+
+.subSectionParagraph {
+  font-family: var(--Figtree);
+  opacity: 0.9;
+  font-size: var(--base-font-size);
+  line-height: var(--base-line-height);
+}
+
+.toc_content {
+  padding: 4px 8px;
+}
+
+.toc_content.active {
+  border-bottom: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  background: #cee2ea;
+  border-left: 2px solid var(--primary-color);
+  border-bottom: none;
+}
+
+@keyframes shiftLeft {
+  0% {
+    background-position-x: 0 0;
+  }
+  50% {
+    background-position: -100vw;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
 
 @media (max-width: 768px) {
   .pricing-container {
@@ -325,12 +396,12 @@ details p {
   }
 
   .footer-social {
-    grid-template-columns: repeat(auto-fill, 32px);
+    grid-template-columns: repeat(auto-fill, 28px);
   }
 
   .social-icon svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
 
   .footer-header {
@@ -360,5 +431,57 @@ details p {
 
   .newsletter-input-container {
     flex: 1;
+  }
+
+  #legalDocumentationHolder {
+    margin: 0px;
+  }
+
+  .legalDocumentation {
+    width: 100%;
+    grid-template-columns: 1fr !important;
+    border-radius: 0px;
+    box-shadow: none;
+    padding: 8px;
+  }
+
+  .subSectionParagraph {
+    font-size: var(--small-font-size);
+    line-height: var(--small-line-height);
+  }
+
+  .documentation_title h1 {
+    font-size: var(--large-font-size) !important;
+  }
+
+  .documentation_holder {
+    width: 100%;
+  }
+
+  #footer {
+    margin-top: 0px !important;
+  }
+
+  .newsletter-button button {
+    padding: 0px 12px;
+    height: 100%;
+    font-size: var(--small-font-size);
+  }
+
+  input {
+    font-size: var(--small-font-size);
+  }
+
+  .toc_contents {
+    flex-direction: row;
+  }
+
+  .documentation_toc {
+    padding: 12px 0px;
+  }
+
+  .toc_content.active {
+    border-bottom: 2px solid var(--primary-color);
+    border-left: none;
   }
 }

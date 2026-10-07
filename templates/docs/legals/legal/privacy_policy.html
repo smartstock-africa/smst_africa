@@ -1,6 +1,18 @@
 {% extends 'docs/legals/legal.html' %}
 
 {% block legalTitle %}Privacy Policy{% endblock %}
-
+{% block legalSubTitle %}Privacy Policy{% endblock %}
 {% block content %}
+{% for section in sections %}
+    {% include "docs/legals/snippets/subSection.html" with section=section %}
+{% endfor %}
+{% endblock %}
+
+{% block linkContent %}
+<div class="toc_content active">
+    <span>Privacy Policy</span>
+</div>
+<div class="toc_content">
+    <span>Terms of Use</span>
+</div>
 {% endblock %}

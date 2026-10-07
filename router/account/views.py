@@ -14,6 +14,10 @@ def user(request):
     user = request.user
     if action == "check_username":
         username = request.GET.get('username').lower()
+        if user.is_authenticated:
+            if username == user.username:
+                return JsonResponse({"status": 'valid'})
+            
         exist = check_username(username)
         return JsonResponse({"status": exist})
     if action == "update_username":
@@ -162,6 +166,23 @@ def profile(request):
     if action == "silence_notifications":
         data = json.loads(request.body)
         endpoint = data.get('endpoint')
-        
+    if action == "edit":
+        value = request.GET.get('value')
+        input_value = request.GET.get('input')
+        clean_name = value.split("_")
+        edit_name = " ".join(clean_name)
+        return render(request, 'user/profile/pages/editingpages/edit.html', {'edit_name':edit_name, 'input_id':value, "input_value":input_value})    
+    if action == "edit_personal_info":
+        from core.account.account import change_personal_info
+        data = json.loads(request.body)
+        edit_name = data.get('editName')
+        edit_value = data.get('editValue')
+        change = change_personal_info(request.user.id, edit_name, edit_value)
+        return JsonResponse({
+            'status': change
+        })
     return render(request, 'user/profile/page.html' ,{'vapid_public_key': settings.PROCESSED_VAPID_PUBLIC_KEY})
 
+@smst_logged_in
+def cake(request):
+    return render(request, 'cake/cake.html')

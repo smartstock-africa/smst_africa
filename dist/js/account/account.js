@@ -46,36 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
     NProgress.done();
   });
 
-  $('main').on(
-    'input',
-    '#username',
-    debounce(function (e) {
-      const value = e.target.value
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-zA-Z0-9_]/g, '');
-      e.target.value = value;
-
-      if (value.length <= 4) {
-        showOutput('Username too short.');
-        return;
-      } else if (value.length > 12) {
-        showOutput('Username too long.');
-        return;
-      }
-      $.ajax({
-        type: 'GET',
-        url: `/?action=check_username&username=${value}`,
-        success: function (response) {
-          if (response.status == 'valid') {
-            showOutput('Username is unique.', true);
-          } else {
-            showOutput('Username already taken.');
-          }
-        },
-      });
-    })
-  );
   $('main').on('click', '#formButton', function () {
     let invalid = false;
     $('input').each(function () {
@@ -341,10 +311,4 @@ document.addEventListener('DOMContentLoaded', function () {
       clearOutput();
     })
   );
-  window.visualViewport?.addEventListener('resize', () => {
-    document.documentElement.style.setProperty(
-      '--vh',
-      `${window.visualViewport.height}px`
-    );
-  });
 });

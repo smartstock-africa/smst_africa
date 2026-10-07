@@ -119,11 +119,12 @@ export function showOutput(message, positive = false) {
     .addClass('loading')
     .removeClass('positive negative');
   if (!positive) {
-    $('#formButton').prop('disabled', true);
+    $('#formButton, button').prop('disabled', true);
   } else {
-    $('#formButton').prop('disabled', false);
+    $('#formButton, button').prop('disabled', false);
   }
   let $outputHolder = $('.formOutput');
+
   $outputHolder.empty();
   let messageClass = positive ? 'positive-msg' : 'negative-msg';
   if (messageClass == 'negative-msg') {

@@ -5,10 +5,8 @@
 }
 
 .pageHeader h1 {
-  color: white;
-  backdrop-filter: brightness(0.9);
+  color: var(--white-color-text);
   border-radius: 4px;
-  box-shadow: var(--small-shadow);
 }
 
 h1 {
@@ -153,7 +151,7 @@ h1 {
 }
 
 .social-login-button-holder {
-  background: white;
+  background: var(--white-background);
   margin: 3px;
   border-radius: inherit;
 }
@@ -205,7 +203,7 @@ a {
 }
 
 .content {
-  background: white;
+  background: var(--white-background);
   padding: var(--spacing);
   border-radius: 8px;
   font-family: var(--Figtree);
@@ -234,13 +232,13 @@ a {
   padding: 12px;
   gap: 1rem;
   font-family: var(--Figtree);
-  background: white;
+  background: var(--white-background);
   border-radius: 12px;
 }
 
 .personalInfoBox {
   padding: var(--spacing);
-  background: white;
+  background: var(--white-background);
   border-radius: 4px;
 }
 
@@ -269,6 +267,21 @@ a {
   overflow: hidden;
   flex-direction: column;
   gap: 4px;
+}
+
+.editingIconHolder {
+  margin-left: auto;
+}
+
+.editingContainer {
+  background: var(--white-background);
+  padding: var(--spacing);
+  border-radius: 12px;
+}
+
+.buttonHolder button {
+  width: 100%;
+  border-radius: 4px;
 }
 
 @media (max-width: 768px) {

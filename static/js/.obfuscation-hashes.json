@@ -1,7 +1,9 @@
 {
-  "notification.min.js": "3a9233645021c8366ebbed05ff24aa291b1c87115b2627b5d8d96e96d29c3ff3",
-  "frontend.min.js": "a1938131f7f12d02b248232acef12e3bfddb8ae55a19702d6251577fef642ea5",
-  "account.min.js": "12203b300ae6ccb049f914f1e0aff1b7b965acb986b99c5340efc35b398c6999",
-  "functions.min.js": "be2f7d7708a2a60315e5634ee79e0a22f18e4d36905c5cb6c86f8ca7afe96527",
-  "profile.min.js": "172fbda832f0de70769981688e3e6a64e7c65a228137899c1468bc1b421494a6"
+  "notification.min.js": "00d9ce6ab089be4907a6c67424d786f7eeb482ae336fee89e705a688d20164c4",
+  "frontend.min.js": "99cb235df6bcc9ae5e21571bd6291db51f4f7eb0fec257cd3606bb9e74db5ef4",
+  "account.min.js": "d6074eae5ec475d5904a623aaeb7f4bb6af301648df43b5ba0dde14255824ae6",
+  "functions.min.js": "8a883b7bdf54633d9e567cf473c9bf6f0f8630e5fdf6ba72a2bfbda646d2b9a7",
+  "profile.min.js": "07b05c3786d82c724b06ff000536e4b5c7accfcafa0a3aed88f85b3be03231c2",
+  "cake.min.js": "d8aa7d224e64bef91d15c87e4a035e4b40701eb5e25c1d86b264b45c5b7fc772",
+  "dom_loaded.min.js": "cdcf125b02c8691f21d5935a9ee236bdf6761603b31d0d5cdeaf63fa1d2e863d"
 }

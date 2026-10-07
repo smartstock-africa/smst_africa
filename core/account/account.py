@@ -79,7 +79,16 @@ class AccountRepository:
         except Exception as e:
             logger.critical(f'PushSub Model Error {e}')
             return False
-            
+    
+    @transaction.atomic
+    def change_personal_info(self, user_id, info_field, new_value):
+        try:
+            user = SmstUser.objects.get(id=user_id)
+            setattr(user, info_field, new_value)
+            user.save()
+            return True
+        except:
+            return False
     
 class BaseAccount:
     def __init__(self):
@@ -134,3 +143,10 @@ class CheckNotification(BaseAccount):
     
 def check_notification(user, endpoint):
     return CheckNotification().execute(user, endpoint)
+
+class ChangePersonalInfo(BaseAccount):
+    def execute(self, user_id, info_field, new_value):
+        return self.repo.change_personal_info(user_id, info_field, new_value)
+
+def change_personal_info(user_id, info_field, new_value):
+    return ChangePersonalInfo().execute(user_id, info_field, new_value)

@@ -44,4 +44,13 @@ def user_access(request):
         })
 
 def documentation_access(request, doc):
-    return render(request, 'docs/legals/legal/privacy_policy.html')
+    if doc:
+        page = request.GET.get('page')
+        if page:
+            return render(request, f'docs/legals/extendors/{page}.html')
+        sections = None
+        if doc == "privacy_policy":
+            from core.docs.privacy_policy import sections
+        if doc == "terms_of_use":
+            from core.docs.terms_of_use import sections
+        return render(request, f'docs/legals/legal/{doc}.html', {'sections': sections})

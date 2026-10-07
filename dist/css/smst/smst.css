@@ -29,7 +29,9 @@
       var(--primary-color) 0%,
       var(--secondary-color) 100%);
   --white-color-text: #eeeeee;
+  --white-background: #eeeeee;
   --black-color-text: #010101;
+  --black-background: #010101;
   --base-font-value: 20px;
   --base-font-size: 16px;
   --base-line-height: 1.41;
@@ -183,7 +185,7 @@ svg {
   background: var(--gradient);
   pointer-events: none;
   user-select: none;
-  position: absolute;
+  position: fixed;
   z-index: -1;
 }
 
@@ -440,6 +442,8 @@ select:active{
   background: transparent;
 }
 
+
+
 @media (hover: hover) and (pointer: fine) {
   button:hover::before {
     background: rgba(255, 255, 255, 0.15);
@@ -473,6 +477,11 @@ button:active::before {
 @media (max-width:768px){
   h1{
   font-size: var(--normal-font-size);
-
   }
+
+  .headerContent{
+    gap: 8px;
+  }
+
+  
 }

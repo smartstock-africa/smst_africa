@@ -3,10 +3,14 @@ import {
   enableNotifications,
   checkInput,
 } from '/static/js/common/functions.prod.js';
-import { showErrorMessage } from '/static/js/common/notification.prod.js';
+import {
+  showErrorMessage,
+  showSuccessMessage,
+} from '/static/js/common/notification.prod.js';
 
 document.addEventListener('DOMContentLoaded', function () {
   NProgress.done();
+  let csrftoken = $('[name="csrftoken"]')[0].content;
 
   $(document).ajaxError(function (event, xhr) {
     handleHttpError(xhr.status);
@@ -65,10 +69,37 @@ document.addEventListener('DOMContentLoaded', function () {
       );
     }
   });
-  window.visualViewport?.addEventListener('resize', () => {
-    document.documentElement.style.setProperty(
-      '--vh',
-      `${window.visualViewport.height}px`
-    );
+
+  $('main').on('click', 'button', function () {
+    let $input = $('.inputHolder').find('input');
+    let inputId = $input.attr('id');
+    let value = $input.val().trim();
+    let editName = $input.data('edit-name');
+    if (value.length == 0) {
+      showErrorMessage('Empty Field', 'Kindly Fill in the Blank Space');
+      return;
+    }
+
+    $.ajax({
+      type: 'POST',
+      headers: {
+        'X-CSRFToken': csrftoken,
+      },
+      url: '?action=edit_personal_info',
+      data: JSON.stringify({
+        editName: inputId,
+        editValue: value,
+      }),
+      success: function (response) {
+        if (response.status) {
+          showSuccessMessage(
+            'Details Changed',
+            `You have updated your ${editName}`
+          );
+          return;
+        }
+        showErrorMessage('Details Not Changed', 'An error occurred try again.');
+      },
+    });
   });
 });
