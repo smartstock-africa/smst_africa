@@ -151,7 +151,10 @@ export async function enableNotifications() {
           gettext('You can now receive notifications.')
         );
       } else {
-        showErrorMessage('Notifications Error', 'Kindly Try again');
+        showErrorMessage(
+          gettext('Notifications Error'),
+          gettext('Kindly Try again')
+        );
       }
     },
   });
@@ -185,31 +188,99 @@ export function handleHttpError(status) {
 
     case 403:
       showErrorMessage(
-        'Not Authenticated',
-        "You don't have permission to do that."
+        gettext('Not Authenticated'),
+        gettext('You do not have permission to do that.')
       );
       break;
 
     case 404:
-      showErrorMessage('Not Found', 'The requested resource was not found.');
+      showErrorMessage(
+        gettext('Not Found'),
+        gettext('The requested resource was not found.')
+      );
       break;
 
     case 500:
       showErrorMessage(
-        'An Error Occurred',
-        'Server error. Please try again later.'
+        gettext('An Error Occurred'),
+        gettext('Server error. Please try again later.')
       );
       break;
   }
 }
 
 export function checkInput() {
-  if ($('.switchInput').length) {
-    $('.switchInput').each(function () {
+  $('.switchInput').each(function () {
+    let $this = $(this);
+    if ($this.attr('id') == 'notificationInput') {
       let endpoint = $(this).data('endpoint');
-      if (endpoint) {
-        $(this).find('input[type="checkbox"]').prop('checked', true);
+      $.ajax({
+        type: 'GET',
+        url: `?action=check_notifications&endpoint=${endpoint}`,
+        success: function (response) {
+          if (response.status) {
+            $this.find('input[type="checkbox"]').prop('checked', true);
+          }
+        },
+      });
+    } else if ($this.attr('id') == 'emailNewsletter') {
+      $.ajax({
+        type: 'GET',
+        url: '?action=check_newsletter_subscription',
+        success: function (response) {
+          if (response.status) {
+            $this.find('input[type="checkbox"]').prop('checked', true);
+          }
+        },
+      });
+    }
+  });
+}
+
+export function subscribeNewsletter() {
+  let csrftoken = $('[name="csrftoken"]')[0].content;
+  $.ajax({
+    type: 'POST',
+    headers: {
+      'X-CSRFToken': csrftoken,
+    },
+    url: '?action=subscribe_newsletter',
+    success: function (response) {
+      if (response.status) {
+        showSuccessMessage(
+          'NewsLetter Subscription',
+          'You have subscribed to Smst Newsletter.'
+        );
+      } else {
+        showErrorMessage('Error Occurred', 'Kindly Try Again');
       }
+    },
+  });
+}
+
+export function saveImage() {
+  const $editedImage = $('#imageEditPreview');
+  const croppedImage = $editedImage.cropper('getCroppedCanvas');
+  croppedImage.toBlob(
+    function (blob) {
+      const url = URL.createObjectURL(blob);
+      $('#imgPreview')[0].src = url;
+      const croppedFile = new File([blob], 'product_image.jpg', {
+        type: 'image/jpeg',
+        lastModified: Date.now(),
+      });
+      const dt = new DataTransfer();
+      dt.items.add(croppedFile);
+      $('#imageInput')[0].files = dt.files;
+    },
+    'image/webp',
+    0.9
+  );
+  $('.imageEditHolder')
+    .removeClass('animate__fadeInUp')
+    .addClass('animate__fadeOutDown')
+    .one('animationend', function () {
+      $('.imagePreviewHolder').css('opacity', 1);
+      showSuccessMessage('Image Saved', 'The product image has been saved');
     });
-  }
 }

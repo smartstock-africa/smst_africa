@@ -17,9 +17,9 @@
     <span>{% translate 'Receive Notifications' %}</span>
   </div>
   <div class="switchInputHolder">
-    <div class="switchInput" data-endpoint="{{pager}}">
+    <div class="switchInput" id="notificationInput" data-endpoint="{{pager}}">
         <label class="switch">
-          <input type="checkbox" class="checkbox">
+          <input type="checkbox" id="notifications" class="checkbox">
           <div class="slider"></div>
         </label>
     </div>
@@ -37,9 +37,9 @@
     <span>{% translate 'Receive Email Notifications' %}</span>
   </div>
   <div class="switchInputHolder">
-    <div class="switchInput">
+    <div class="switchInput" id="emailNewsletter">
         <label class="switch">
-          <input type="checkbox" class="checkbox">
+          <input type="checkbox" id="email" class="checkbox">
           <div class="slider"></div>
         </label>
     </div>

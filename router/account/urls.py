@@ -8,5 +8,6 @@ urlpatterns = [
     path('accounts/profile/', profile, name="user"),
     path('accounts/', include('allauth.urls')),
     path("i18n/", include("django.conf.urls.i18n")),
-    path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog")
+    path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
+    path('webhook/', webhook, name="webhook")
 ]

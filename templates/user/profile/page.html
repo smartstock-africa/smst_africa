@@ -119,7 +119,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                 <div class="content flex align-center animate__animated animate__fadeInUp">
+                                 <div hx-get="?page=smstpro" hx-target=".mainContent" hx-swap="replace" hx-push-url="?view_page=smstpro" class="content flex align-center animate__animated animate__fadeInUp">
                                     <div class="contentIconHolder">
                                         <div class="contentIcon">
                                             <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -151,7 +151,7 @@
                                         </div>
                                     </div>
                                     <div class="contentText">
-                                        <span>Logout</span>
+                                        <span>{% translate 'Logout' %}</span>
                                     </div>
                                     
                                 </div>
@@ -166,10 +166,13 @@
 {% endblock %}
 
 {% block script %}
-    <script src="{% url 'javascript-catalog' %}"></script>
-    <script type="module" src="{% static 'js/account/profile.prod.js' %}"></script>
-    <script>
+    <script nonce="{{csp_nonce}}" src="{% url 'javascript-catalog' %}"></script>
+    <script nonce="{{csp_nonce}}" type="module" src="{% static 'js/account/profile.prod.js' %}"></script>
+    <script nonce="{{csp_nonce}}">
       NProgress.configure({spinner:false})
       NProgress.start()
     </script>
+    <script nonce="{{csp_nonce}}" src="https://js.paystack.co/v2/inline.js"></script>
+    <script nonce="{{csp_nonce}}" type="module" src="{% static 'js/channels/profile.prod.js' %}"></script>
+
     {% endblock %}

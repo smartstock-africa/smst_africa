@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from core.account.account import *
 from django.template.loader import render_to_string
 from django.shortcuts import redirect
@@ -9,6 +9,36 @@ from django.conf import settings
 from django_ratelimit.decorators import ratelimit
 from django.contrib.auth import logout
 from django.core.cache import cache
+from django.views.decorators.csrf import csrf_exempt
+import logging
+logger = logging.getLogger('smst')
+@csrf_exempt
+def webhook(request):
+    from core.utils import get_signature
+    if request.method != "POST":
+        return HttpResponse(status=405)
+    
+    provider = request.GET.get('provider')
+    if provider == "paystack":
+        action = request.GET.get('action')
+        if action == "successPayment":
+            payload = request.body
+            logger.debug(type(payload))
+            valid_sign = get_signature(request.headers.get('x-paystack-signature'), payload)
+            if not valid_sign:
+                return HttpResponse(status=401)
+            
+            data = json.loads(payload)
+            if data.get('event') == "charge.success":
+                from core.account.pro import make_user_pro
+                data = data['data']
+                reference = data['reference']
+                email = data['customer']['email']
+                amount = data['amount']
+                make_user_pro(reference, email, amount)
+                return HttpResponse(status=200)
+            
+            computed_signature
 
 @ratelimit(key="post:email", rate="50/m")
 def user(request):
@@ -87,7 +117,7 @@ def user(request):
         data = json.loads(request.body)
         email = data.get('email')
         password = data.get('password')
-        user = authenticate(request=request,email=email, password=password)
+        user = authenticate(request=request,email=email, password=password) 
         status = False
         if user:
             status = True
@@ -139,7 +169,8 @@ def user(request):
     
     return render(request, 'user/page/signup.html')
 from core.decorator import smst_logged_in
-
+import logging
+logger = logging.getLogger('smst')
 @smst_logged_in
 def profile(request):
     user = request.user
@@ -151,9 +182,16 @@ def profile(request):
         if page == "notifications":
             endpoint = request.session.get('endpoint')
             data = {'pager': endpoint}
+        if page == "smstpro" and user.has_active_subscription:
+            return render(request, f'user/profile/pages/minipages/smst_pro_verification.html')
         return render(request, f'user/profile/pages/minipages/{page}.html', data)
     
     action = request.GET.get('action')
+    if action == "check_notifications":
+        from core.account.account import check_notification
+        return JsonResponse({
+            'status': check_notification(user, request.GET.get('endpoint'))
+        })
     if action == "activate_notifications":
         from core.account.account import enable_notifications
         data = json.loads(request.body)
@@ -166,8 +204,13 @@ def profile(request):
             'status': notifications
         })
     if action == "silence_notifications":
+        from core.account import silence_notifications
         data = json.loads(request.body)
         endpoint = data.get('endpoint')
+        silenced = silence_notifications(endpoint, user.id)
+        return JsonResponse({
+            'status': silenced
+        })
     if action == "edit":
         value = request.GET.get('value')
         input_value = request.GET.get('input')
@@ -184,6 +227,15 @@ def profile(request):
             'status': change
         })
     if action == "change_password":
+        verification = request.GET.get('verification')
+        if verification:
+            from core.account.account import change_password
+            data = json.loads(request.body)
+            password = data.get('password')
+            changed = change_password(user.email, password)
+            if changed:
+                logout(request)
+            return JsonResponse({'status': changed})
         return render(request, 'user/profile/pages/verification/password.html')
     if action == "confirm_password":
         from core.account.account import check_smst_password
@@ -208,6 +260,22 @@ def profile(request):
     if action == "logout":
         logout(request)
         return JsonResponse({'status': True})
+    if action == "init_paystack":
+        from core.utils import initialize_paystack_transacton
+        response = initialize_paystack_transacton(user.email, '49900')
+        return JsonResponse({'response': response})
+    if action == "check_newsletter_subscription":
+        from core.frontend.frontend import check_newsletter_subscription
+        subscription = check_newsletter_subscription(user.email)
+        return JsonResponse({
+            'status': subscription
+        })
+    if action == "subscribe_newsletter":
+        from core.frontend.frontend import create_newsletter_user
+        subscribed = create_newsletter_user(user.email, user.first_name, user.last_name)
+        return JsonResponse({
+            'status': subscribed
+        })
     return render(request, 'user/profile/page.html' ,{'vapid_public_key': settings.PROCESSED_VAPID_PUBLIC_KEY})
 
 @smst_logged_in

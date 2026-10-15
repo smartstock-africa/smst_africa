@@ -142,6 +142,11 @@ details p {
   margin: 0;
 }
 
+.cookie_button_holder button {
+  width: 100%;
+  border-radius: 4px;
+}
+
 .footer-grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -294,7 +299,7 @@ details p {
 
 .legalDocumentation {
   background: var(--white-background);
-  width: 50%;
+  width: clamp(300px, calc(50vw + 300px), 1000px);
   margin: auto;
   border-radius: 12px;
   box-shadow: var(--small-shadow);
@@ -314,6 +319,7 @@ details p {
   font-weight: 500;
   opacity: 0.8;
   cursor: pointer;
+  text-wrap-mode: nowrap;
 }
 
 .documentation_holder {
@@ -347,6 +353,8 @@ details p {
 
 .toc_content {
   padding: 4px 8px;
+  text-decoration: none;
+  color: var(--black-color-text);
 }
 
 .toc_content.active {
@@ -357,13 +365,42 @@ details p {
   border-bottom: none;
 }
 
+#cookie_banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  backdrop-filter: brightness(0.7);
+  pointer-events: none;
+  z-index: 99;
+  display: none;
+}
+
+.cookie_policy_holder {
+  width: 30vw;
+  background: var(--secondary-color);
+  border-radius: 12px;
+  margin: auto;
+  margin-top: 12px;
+  padding: 12px;
+  pointer-events: all;
+}
+
+.cookie_paragraph_text {
+  font-family: var(--Figtree);
+  font-size: var(--small-font-size);
+}
+
 @keyframes shiftLeft {
   0% {
     background-position-x: 0 0;
   }
+
   50% {
     background-position: -100vw;
   }
+
   100% {
     background-position: 0 0;
   }
@@ -474,6 +511,9 @@ details p {
 
   .toc_contents {
     flex-direction: row;
+    font-size: var(--small-font-size);
+    overflow-x: scroll;
+    padding: 4px;
   }
 
   .documentation_toc {
@@ -483,5 +523,9 @@ details p {
   .toc_content.active {
     border-bottom: 2px solid var(--primary-color);
     border-left: none;
+  }
+
+  .cookie_policy_holder {
+    width: calc(100% - 2rem);
   }
 }

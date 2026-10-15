@@ -5,6 +5,7 @@ let notificationId = {
   error: 1,
 };
 export function showSuccessMessage(title, content) {
+  let deferred = $.Deferred();
   let id = notificationId['success'];
   let $notification =
     $(`<div class="notification success flex animate__animated animate__fadeInUp">
@@ -50,14 +51,19 @@ export function showSuccessMessage(title, content) {
           if (!$('.notification').length) {
             $('#notification-center').remove();
           }
+          deferred.resolve();
         });
     }, 3000);
   });
 
   notificationId['success'] = ++id;
+  return deferred.promise();
 }
 
-export function showErrorMessage(title, content) {
+export function showErrorMessage(
+  title = gettext('An Error Occurred'),
+  content = gettext('Kindly Try Again Later')
+) {
   let id = notificationId['error'];
   let $notification =
     $(`<div class="notification error flex animate__animated animate__fadeInUp">
@@ -150,4 +156,17 @@ export function clearOutput() {
   $outputHolder.empty();
   $feedback.removeClass('loading negative').addClass('positive');
   $('#formButton, button').prop('disabled', false);
+}
+
+export function unreadNotifications() {
+  $.ajax({
+    type: 'GET',
+    url: '/?action=any_unread_notifications',
+    success: function (response) {
+      if (response.status) {
+        let $notDot = $('<div class="notificationDot"></div>');
+        $('.messageIconHolder').append($notDot);
+      }
+    },
+  });
 }

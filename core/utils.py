@@ -1,5 +1,6 @@
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+import uuid
 import logging
 logger = logging.getLogger('smst')
 def check_email(email):
@@ -43,18 +44,19 @@ def confirm_otp(otp, id):
         return True
     return False
 
-from backend.models import SmstUser
 def confirm_user(email):
+    from backend.models import SmstUser
     return SmstUser.objects.filter(email=email).exists()
 
 def confirm_social(email):
+    from backend.models import SmstUser
     return SmstUser.objects.filter(email=email, social_acc=True).exists()
 
 import json
 from django.conf import settings
 from pywebpush import webpush, WebPushException
 
-def send_web_push(subscription, title, body, url):
+def send_web_push(subscription, title, body, url, icon):
     subscription_info = {
         "endpoint": subscription.endpoint,
         "keys": {
@@ -66,7 +68,7 @@ def send_web_push(subscription, title, body, url):
     payload = json.dumps({
         "title": title,
         "body": body,
-        "icon": 'https://res.cloudinary.com/di3bh4qsl/image/upload/v1780517418/latest_smst_logo_1_vrlvwa.png',
+        "icon": icon,
         "badge": 'https://res.cloudinary.com/di3bh4qsl/image/upload/v1790847358/smst_logo_badge_ix7iyn.png',
         "data": {
             "url": url
@@ -84,4 +86,64 @@ def send_web_push(subscription, title, body, url):
         )
     except WebPushException as e:
         logger.critical(f'Web Push Sub Sending Error {e}')
-        
+
+def generate_pro_code():
+    from backend.models import SmstSubscription
+    while True:
+        code = f'PRO_{uuid.uuid4().hex[:10]}'
+        if not SmstSubscription.objects.filter(subscription_code=code).exists():
+            return code
+
+def generate_notification_id():
+    from smst_app.models import AppNotifications
+    while True:
+        notifId = str(uuid.uuid4())
+        if not AppNotifications.objects.filter(notificationId=notifId).exists():
+            return notifId
+
+from decouple import config
+import requests
+def initialize_paystack_transacton(email, amount):
+    url = 'https://api.paystack.co/transaction/initialize'
+    secret_key = settings.PAYSTACK_SECRET_KEY
+    headers = {
+        "Authorization": f"Bearer {secret_key}",
+        "Content-Type": "application/json"
+    }
+    
+    payload = {
+        'email': email,
+        "amount": amount,
+        "callback_url": "https://user.smartstock.africa/accounts/profile/?view_page=smst_pro_verification"
+    }
+    
+    response = requests.post(url, json=payload, headers=headers)
+    response.raise_for_status()
+    return response.json()
+
+def verify_paystack_transaction(reference):
+    url = "https://api.paystack.co/transaction/verify"
+    secret_key = settings.PAYSTACK_SECRET_KEY
+    headers = {
+        "Authorization": f"Bearer {secret_key}",
+        "Content-Type": "application/json"
+    }
+    
+    payload = {
+        'reference':reference
+    }
+    
+    response = requests.post(url, json=payload, headers=headers)
+    response.raise_for_status()
+    logger.debug(response)
+    return response.json()
+
+import hmac
+from django.conf import settings
+def get_signature(header_signature, payload):
+    return header_signature == hmac.new(
+        key = settings.PAYSTACK_SECRET_KEY.encode(),
+        msg=payload,
+        digestmod=hashlib.sha512
+    ).hexdigest()
+    

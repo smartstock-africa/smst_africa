@@ -8,15 +8,22 @@ class NewsLetterUser:
     lastName: str
 
 class NewsLetterRepo:
+    def check_newsletter_subscription(self, email):
+        return SmStNewsLetter.objects.filter(email=email).exists()
+    
     @transaction.atomic
     def create_newsletter_user(self, newsletter:NewsLetterUser) -> list:
-        SmStNewsLetter.objects.get_or_create(
-            email = newsletter.email,
-            defaults = {
-                "first_name": newsletter.firstName,
-                "last_name": newsletter.lastName
-            }
-        )
+        try:
+            SmStNewsLetter.objects.get_or_create(
+                email = newsletter.email,
+                defaults = {
+                    "first_name": newsletter.firstName,
+                    "last_name": newsletter.lastName
+                }
+            )
+            return True
+        except:
+            return False
     
     @transaction.atomic
     def remove_news_letter_user(self, email)->bool:
@@ -49,3 +56,10 @@ class RemoveNewsLetterUser(BaseNewsLetter):
     
 def remove_news_letter_user(email):
     return RemoveNewsLetterUser().execute(email)
+
+class CheckNewsletterSubscription(BaseNewsLetter):
+    def execute(self, email):
+        return self.repo.check_newsletter_subscription(email)
+    
+def check_newsletter_subscription(email):
+    return CheckNewsletterSubscription().execute(email)

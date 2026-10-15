@@ -3,6 +3,7 @@ from django.core.mail import EmailMultiAlternatives, get_connection
 from django.template.loader import render_to_string
 from .utils import *
 from django.core.cache import cache
+from .decorator import check_email_wrapper
 connection = get_connection()
 from_email = "support@smartstock.africa"
 
@@ -51,10 +52,10 @@ def send_otp_email(email):
     subject = "Your verification OTP"
     send_configured_email(subject, text_content, emails, html_content)
         
+# @check_email_wrapper
 @shared_task
 def send_link_email(email):
-    if not check_email(email):
-        return
+    
     emails = [email]
     user_model = SmstUser.objects.filter(email=email)
     if not user_model.exists():
@@ -67,10 +68,27 @@ def send_link_email(email):
     subject = "Reset your password"
     send_configured_email(subject, text_content, emails, html_content)
 
+# @check_email_wrapper
 @shared_task
-def send_notification(username, title, body, url="https://user.smartstock.africa"):
+def send_receipt(email, receipt_id,purpose,amount, time):
+    emails = [email]
+    subject = "Payment Received"
+    
+    html_content = render_to_string('email/subscription_email.html', {'receipt_id': receipt_id, "purpose": purpose, "amount": amount, "time": time})
+    text_content = "Payment Received (Use an HTML-compatible email viewer to see full content)"
+    send_configured_email(subject, text_content, emails, html_content)
+    
+
+@shared_task
+def send_notification(username, title, body, url="https://user.smartstock.africa", pro=False):
     from backend.models import SmstUserPushSubscription as PushModel
     from .utils import send_web_push
     subscription = PushModel.objects.filter(user__username=username)
+    icon = 'https://res.cloudinary.com/di3bh4qsl/image/upload/v1780517418/latest_smst_logo_1_vrlvwa.png'
+    if pro:
+        icon = 'https://res.cloudinary.com/di3bh4qsl/image/upload/v1791388671/smst_pro_logo_fobkyu.png'
     for sub in subscription:
-        send_web_push(sub, title, body, url)
+        
+        send_web_push(sub, title, body, url, icon)
+        
+

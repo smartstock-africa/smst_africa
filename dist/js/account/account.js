@@ -1,6 +1,6 @@
 import {
   debounce,
-  checkEmail,git add
+  checkEmail,
   updateCooldown,
   startCooldown,
   parseDuration,
@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
       let val = $input.val().trim();
       if (val.length <= 0) {
         showErrorMessage(
-          'Empty Fields',
-          'Kindly fill the input with information'
+          gettext('Empty Fields'),
+          gettext('Kindly fill the input with information')
         );
         invalid = true;
         return;
@@ -87,12 +87,16 @@ document.addEventListener('DOMContentLoaded', function () {
         success: function (response) {
           if (response.status) {
             showSuccessMessage(
-              'Username Changed',
-              'You have successfully updated your username.'
-            );
-            window.location.reload();
+              gettext('Username Changed'),
+              gettext('You have successfully updated your username.')
+            ).done(() => {
+              window.location.reload();
+            });
           } else {
-            showErrorMessage('Error', 'Your username could not be changed.');
+            showErrorMessage(
+              gettext('Error'),
+              gettext('Your username could not be changed.')
+            );
           }
         },
       });
@@ -112,7 +116,10 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     } else if ($otp.length) {
       if ($otp.val().trim().length < 5) {
-        showErrorMessage('Invalid OTP', 'The OTP is 6 digits long.');
+        showErrorMessage(
+          gettext('Invalid OTP'),
+          gettext('The OTP is 6 digits long.')
+        );
         return;
       }
       $.ajax({
@@ -130,12 +137,18 @@ document.addEventListener('DOMContentLoaded', function () {
             window.location.href = response.url;
             return;
           } else if (status) {
-            showSuccessMessage('OTP Correct!', 'Validating your details');
-            $('#formContent').empty().append(response.html);
+            showSuccessMessage(
+              gettext('OTP Correct!'),
+              gettext('Validating your details')
+            ).done(() => {
+              $('#formContent').empty().append(response.html);
+            });
           } else {
             showErrorMessage(
-              'Invalid OTP!',
-              'Confirm you are entering the latest password and it has not expired.'
+              gettext('Invalid OTP!'),
+              gettext(
+                'Confirm you are entering the latest password and it has not expired.'
+              )
             );
           }
         },
@@ -155,10 +168,16 @@ document.addEventListener('DOMContentLoaded', function () {
           }),
           success: function (response) {
             if (response.status) {
-              showOutput('Details Saved', 'Log into your account.');
+              showOutput(
+                gettext('Details Saved'),
+                gettext('Log into your account.')
+              );
               window.location.reload();
             } else {
-              showErrorMessage('Error Occurred', 'Try creating again.');
+              showErrorMessage(
+                gettext('Error Occurred'),
+                gettext('Try creating again.')
+              );
             }
           },
         });
@@ -179,12 +198,13 @@ document.addEventListener('DOMContentLoaded', function () {
         success: function (response) {
           let status = response.status;
           if (status) {
-            showSuccessMessage('Success', 'Logging your Account');
-            window.location.reload();
+            showSuccessMessage('Success', 'Logging your Account').done(() => {
+              window.location.reload();
+            });
           } else {
             showErrorMessage(
-              'Invalid',
-              'You have entered the wrong password or email.'
+              gettext('Invalid'),
+              gettext('You have entered the wrong password or email.')
             );
           }
         },
@@ -227,13 +247,17 @@ document.addEventListener('DOMContentLoaded', function () {
         success: function (response) {
           if (response.status) {
             showSuccessMessage(
-              'Password Changed',
-              'Login with your new values'
-            );
-            $('#formContent').empty().append(response.html);
-            return;
+              gettext('Password Changed'),
+              gettext('Login with your new values')
+            ).done(() => {
+              $('#formContent').empty().append(response.html);
+              return;
+            });
           }
-          showErrorMessage('Password Not Changed', 'Kindly Try again.');
+          showErrorMessage(
+            gettext('Password Not Changed'),
+            gettext('Kindly Try again.')
+          );
         },
       });
     }
@@ -246,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const value = e.target.value.trim().toLowerCase();
       $(this).val(value);
       if (!checkEmail(value)) {
-        showOutput('Kindly Enter a valid Email');
+        showOutput(gettext('Kindly Enter a valid Email'));
         return;
       }
       clearOutput();

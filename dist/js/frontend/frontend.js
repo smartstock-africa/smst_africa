@@ -92,12 +92,30 @@ document.addEventListener('DOMContentLoaded', function () {
         url: '/users/?action=register-newsletter',
         success: function () {
           showSuccessMessage(
-            'Subscribed',
-            'You have successfully subscribed to SmSt Newsletter'
+            gettext('Subscribed'),
+            gettext('You have successfully subscribed to SmSt Newsletter')
           );
         },
         error: function () {},
       });
     }
+  });
+
+  if (!localStorage.getItem('cookie_acceptance')) {
+    $('#cookie_banner').fadeIn();
+  }
+
+  $('#accept_cookies').on('click', function () {
+    $('.cookie_policy_holder')
+      .removeClass('animate__fadeInUp')
+      .addClass('animate__fadeOutDown')
+      .one('animationend', function () {
+        localStorage.setItem('cookie_acceptance', true);
+        showSuccessMessage(
+          'Cookie Preference Set',
+          'You have accepted our Cookie Policy'
+        );
+        $('#cookie_banner').remove();
+      });
   });
 });

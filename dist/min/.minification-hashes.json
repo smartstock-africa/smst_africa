@@ -1,9 +1,11 @@
 {
-  "common/notification.js": "89b8d1785fafe90ebdf93818b8d4f8ee8e8933df4910551995b255d7001be92e",
-  "frontend/frontend.js": "e2931d2fb0ea70246f161239e96e6242a5bdd8e0045af3efdc80f2b7505989e1",
-  "account/account.js": "5f892082152db4bf6739a1eccecf41d7cc8ee21128f304fd8946e09e5aded499",
-  "common/functions.js": "51fdc86740e0da6c1ea3ae2f3e31f63bd1249d5f0e522fef6e1345cc94a4dbde",
-  "account/profile.js": "96b9ad998a844995485258113220eb645077879b248a527afc145fd73aa950a3",
+  "common/notification.js": "cfa3252b7ca52e9afe2464d224d36fc0fb379523b027d975ade54a2332ea52e2",
+  "frontend/frontend.js": "7511947ab2f6594adff4bd1b3e79aaaac312141dfa69a96aad57316091f8f7d5",
+  "account/account.js": "5acfc03b8bea3cbb4fa34b2cf443b052f91e5f04403e8c6bbfc14a88b26e9252",
+  "common/functions.js": "2496b7a595d1fcee98abfe4d7818c6b02972541c1a746006a47a89bb56ae04b0",
+  "account/profile.js": "bfce9dde3658b1e0d250a02f1b6839ad5d1207ca021c348a1eea338efcaaf507",
   "cake/cake.js": "9c788c453c7bb681d9ecf7fee8e9fa9b60a23b673cc0d25966568e75aa1ddf92",
-  "common/dom_loaded.js": "21a0dbc5ff9a7c017dfc88af8ea7a79cc06b069ed6ba9f4424c6de79d0dfad5d"
+  "common/dom_loaded.js": "e508ea1dd45acb64c6814d24fe60ba0f9c9ec37ef3cf03cf9f26be984691396b",
+  "channels/profile.js": "210c90522062d49b301c96417f31e499c5a76ef13132d3bfb48b40577fb4f985",
+  "app/app.js": "c977d41b8f1847e37c9809766ecf05cae7c6fd9a4a474dd2aa93853d78ff9a24"
 }

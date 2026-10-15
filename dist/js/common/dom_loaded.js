@@ -1,6 +1,7 @@
 import {
   debounce,
   validatePassword,
+  handleHttpError,
 } from '/static/js/common/functions.prod.js';
 import {
   showOutput,
@@ -8,6 +9,25 @@ import {
 } from '/static/js/common/notification.prod.js';
 
 document.addEventListener('DOMContentLoaded', function () {
+  $(document).ajaxError(function (event, xhr) {
+    handleHttpError(xhr.status);
+  });
+
+  $(document).ajaxStart(function () {
+    NProgress.start();
+  });
+  $(document).ajaxComplete(function () {
+    NProgress.done();
+  });
+
+  $(document).on('htmx:beforeRequest', function () {
+    NProgress.start();
+  });
+
+  $(document).on('htmx:afterSwap', function () {
+    NProgress.done();
+  });
+
   $('main').on(
     'input',
     '#username',
@@ -19,10 +39,10 @@ document.addEventListener('DOMContentLoaded', function () {
       e.target.value = value;
 
       if (value.length <= 4) {
-        showOutput('Username too short.');
+        showOutput(gettext('Username too short.'));
         return;
       } else if (value.length > 12) {
-        showOutput('Username too long.');
+        showOutput(gettext('Username too long.'));
         return;
       }
       $.ajax({
@@ -30,9 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
         url: `/?action=check_username&username=${value}`,
         success: function (response) {
           if (response.status == 'valid') {
-            showOutput('Username is unique.', true);
+            showOutput(gettext('Username is unique.'), true);
           } else {
-            showOutput('Username already taken.');
+            showOutput(gettext('Username already taken.'));
           }
         },
       });
@@ -61,12 +81,18 @@ document.addEventListener('DOMContentLoaded', function () {
       let passwordField =
         e.target.id === 'password2' ? '#password1' : '#reppassword1';
       if (value !== $(passwordField).val()) {
-        showOutput('Passwords do not match.');
+        showOutput(gettext('Passwords do not match.'));
         return;
       }
       clearOutput();
     })
   );
+
+  $('body').on('keypress', 'input', function (e) {
+    if (e.key == 'Enter') {
+      $(this).parent().parent().find('button').trigger('click');
+    }
+  });
   window.visualViewport?.addEventListener('resize', () => {
     document.documentElement.style.setProperty(
       '--vh',

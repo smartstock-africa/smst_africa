@@ -4,11 +4,11 @@
 <div class="form auto-margin">
 <div class="profileForm">
     <div class="profileFormHeader">
-        <h1>Username</h1>
+        <h1>{% translate 'Username' %}</h1>
     </div>
     <div class="profileFormContent flex">
         <div class="formContentHeader">
-            <span>Enter your unique username</span>
+            <span>{% translate 'Enter your unique username' %}</span>
         </div>
         <div class="inputHolder">
             <input type="text" id="username" placeholder="Enter your username">
@@ -33,7 +33,7 @@
         </div>
         {% include 'snippets/notifications/formOutput.html' %}
         <div class="formButtonHolder flex">
-            <button id="formButton" disabled>Save Username</button>
+            <button id="formButton" disabled>{% translate 'Save Username' %}</button>
         </div>
     </div>
 </div>
@@ -42,5 +42,5 @@
 
 
 {% block script %}
-    <script type="module" src="{% static 'js/account/account.prod.js' %}"></script>
+    <script nonce="{{csp_nonce}}" type="module" src="{% static 'js/account/account.prod.js' %}"></script>
 {% endblock %}

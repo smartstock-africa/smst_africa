@@ -43,14 +43,22 @@ def user_access(request):
             "success_content": success_content
         })
 
+import importlib
+
+docs = {
+    'privacy_policy':"core.docs.privacy_policy",
+    'terms_of_use': 'core.docs.terms_of_use',
+    'payment_policy': 'core.docs.payment_policy',
+    'cookie_policy': 'core.docs.cookie_policy',
+}
+
 def documentation_access(request, doc):
     if doc:
         page = request.GET.get('page')
         if page:
             return render(request, f'docs/legals/extendors/{page}.html')
         sections = None
-        if doc == "privacy_policy":
-            from core.docs.privacy_policy import sections
-        if doc == "terms_of_use":
-            from core.docs.terms_of_use import sections
-        return render(request, f'docs/legals/legal/{doc}.html', {'sections': sections})
+        sections = importlib.import_module(docs[doc]).sections
+        if sections:
+            return render(request, f'docs/legals/legal/{doc}.html', {'sections': sections})
+        return HttpResponseRedirect('https://smst.smartstock.africa')

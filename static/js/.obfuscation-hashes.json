@@ -1,9 +1,10 @@
 {
-  "notification.min.js": "f456e243319ed0839fda69aa273b9dda394adf478ee2aa35ec9ebd31b855c0e0",
-  "frontend.min.js": "99cb235df6bcc9ae5e21571bd6291db51f4f7eb0fec257cd3606bb9e74db5ef4",
-  "account.min.js": "ec251fe68ab3d1a52a02d09ea3046edf9b20c4ec7605e2ed1d936e37643d11ec",
-  "functions.min.js": "8a883b7bdf54633d9e567cf473c9bf6f0f8630e5fdf6ba72a2bfbda646d2b9a7",
-  "profile.min.js": "bf25416b47aef1016db4edf0eec98b9936208f0eae9291f62e22d867a89a1cb7",
+  "notification.min.js": "7ed2d21d95ff64dbf6dc741a077703005782a70cb36070319f71c9386a5935d0",
+  "frontend.min.js": "27a455a82fc0d398302e86f5988f43773d5b90e21e764ed28cb66220d8381958",
+  "account.min.js": "9b7ee047a48e6c469f7a2679eb209dc5d75ccf3366c1c423603eaeab614b3c21",
+  "functions.min.js": "525c9c81d86f0ad7e8b5eb086d5ed3198806c1c1d32373b141c901cd189b6575",
+  "profile.min.js": "4ebccf93a1d57e772b9250a41cec7489e0160af2f5d34337d535a3bac42728da",
   "cake.min.js": "d8aa7d224e64bef91d15c87e4a035e4b40701eb5e25c1d86b264b45c5b7fc772",
-  "dom_loaded.min.js": "05e4abf8f605000589dd954e5d90b6ef0ab63f26cd7d6efc11036c2683a8984f"
+  "dom_loaded.min.js": "55ea72669e814a524b0dd2db194082576dc482655b9b791d42a802f14e2032aa",
+  "app.min.js": "7e64d93cc6b59d7fa7878ba50b4ff9abb905bf715fec3714246e261b47184fb6"
 }

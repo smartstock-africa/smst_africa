@@ -1,9 +1,12 @@
 from dataclasses import dataclass
-from backend.models import SmstUser, SmstUserPushSubscription as PushModel
+from backend.models import *
+from backend.models import SmstUserPushSubscription as PushModel
 from django.contrib.auth.hashers import check_password, make_password
 from django.db import transaction
 import logging
 from django.utils.translation import gettext as _
+
+
 
 logger = logging.getLogger('smst')
 
@@ -27,8 +30,8 @@ class AccountRepository:
             return "exists"
         return "valid"
     
-    def check_notification(self, user):
-        return 
+    def check_notification(self, user,endpoint):
+        return SmstUserPushSubscription.objects.filter(user=user, endpoint=endpoint).exists()
     
     def check_password(self, user_id, password):
         user = SmstUser.objects.filter(id=user_id).first()
@@ -36,7 +39,9 @@ class AccountRepository:
     @transaction.atomic
     def change_username(self, account:Account)->bool:
         try:
+            from core.tasks import send_notification
             SmstUser.objects.filter(id=account.account_id).update(username=account.username)
+            send_notification.delay(account.username, _('Username Changed.'),_(f'You have changed your username recently.'), 'https://user.smartstock.africa/accounts/profile/?view_page=security')
             return True
         except:
             return False
@@ -59,7 +64,12 @@ class AccountRepository:
     @transaction.atomic
     def change_password(self, email, password)->bool:
         try:
-            SmstUser.objects.filter(email=email).update(password=make_password(password))
+            from core.tasks import send_notification
+           
+            user=SmstUser.objects.filter(email=email)
+            user.update(password=make_password(password))
+            send_notification.delay(user.first().username,_('Password Changed.'),_(f'You have changed your password'), 'https://user.smartstock.africa/accounts/profile/?view_page=account')
+
             return True
         except:
             return False
@@ -69,20 +79,30 @@ class AccountRepository:
         from core.tasks import send_notification
         try:
             user = SmstUser.objects.get(id=pushSub.user)
-            PushModel.objects.get_or_create(
-                user=user,
+            PushModel.objects.update_or_create(
                 endpoint=pushSub.endpoint,
                 defaults={
+                    'user': user,
                     'p256dh': pushSub.p256dh,
                     'auth': pushSub.auth
                 }
             )
-            send_notification.delay(user.username, _('Notification'), _('Here is a message'))
+            send_notification.delay(user.username, _('Notification'), _('Here is a message'), pro=user.has_active_subscription)
             return True
         except Exception as e:
             logger.critical(f'PushSub Model Error {e}')
             return False
     
+    @transaction.atomic
+    def silence_notifications(self, endpoint, user):
+        notifications= PushModel.objects.filter(
+            endpoint=endpoint,
+            user__id=user
+        ).first()
+        if notifications:
+            notifications.delete()
+            return True
+        return False
     @transaction.atomic
     def change_personal_info(self, user_id, info_field, new_value):
         try:
@@ -139,6 +159,13 @@ class EnableNotifications(BaseAccount):
     
 def enable_notifications(endpoint, p256dh, auth, user):
     return EnableNotifications().execute(endpoint, p256dh, auth, user)
+
+class SilenceNotifications(BaseAccount):
+    def execute(self, endpoint, user):
+        return self.repo.silence_notifications(endpoint, user)
+    
+def silence_notifications(endpoint, user):
+    return SilenceNotifications().execute(endpoint, user)
 
 class CheckNotification(BaseAccount):
     def execute(self, user, endpoint):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 17:55+0200\n"
+"POT-Creation-Date: 2026-10-15 10:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,110 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/account/account.py:77
+#: core/account/account.py:44
+msgid "Username Changed."
+msgstr "Jina la mtumiaji limebadilishwa."
+
+#: core/account/account.py:44
+msgid "You have changed your username recently."
+msgstr "Umebadilisha jina lako la mtumiaji hivi karibuni."
+
+#: core/account/account.py:71
+msgid "Password Changed."
+msgstr "Nenosiri limebadilishwa"
+
+#: core/account/account.py:71
+msgid "You have changed your password"
+msgstr "Umebadilisha nenosiri lako"
+
+#: core/account/account.py:90
 msgid "Notification"
 msgstr "Taarifa"
 
-#: core/account/account.py:77
+#: core/account/account.py:90
 msgid "Here is a message"
 msgstr "Hapa kuna habari"
+
+#: core/account/pro.py:40
+msgid "Upgraded to Smst Pro"
+msgstr "Umeboreshwa hadi Smst Pro"
+
+#: core/account/pro.py:40
+msgid "Enjoy Premium Experience"
+msgstr "Furahia uzoefu wa kiwango cha juu"
+
+#: templates/app/apps/smst_stocks/forms/create_product.html:7
+msgid "Create A Product"
+msgstr "Unda Bidhaa"
+
+#: templates/app/apps/smst_stocks/forms/create_product.html:27
+msgid "Add Your Product Image"
+msgstr "Ongeza picha ya bidhaa yako"
+
+#: templates/app/apps/smst_stocks/forms/create_product.html:36
+msgid "Product Name"
+msgstr "Jina La Bidhaa"
+
+#: templates/app/apps/smst_stocks/forms/create_product.html:39
+msgid "Enter the name of your Product"
+msgstr "Weka jina la bidhaa yako"
+
+#: templates/app/apps/smst_stocks/forms/create_product.html:44
+msgid "Product Description"
+msgstr "Maelezo ya Bidhaa"
+
+#: templates/app/apps/smst_stocks/forms/create_product.html:50
+msgid "Description Type"
+msgstr "Aina ya Maelezo"
+
+#: templates/app/apps/smst_stocks/forms/create_product.html:53
+msgid "e.g Weight"
+msgstr "mf. Uzito"
+
+#: templates/app/apps/smst_stocks/forms/create_product.html:58
+msgid "Description Value"
+msgstr "Maelezo Thamani"
+
+#: templates/app/apps/smst_stocks/forms/create_product.html:61
+msgid "e.g 500g"
+msgstr "mf. gramu 500"
+
+#: templates/app/apps/smst_stocks/forms/create_product.html:67
+msgid "Add Description"
+msgstr "Ongeza Maelezo"
+
+#: templates/app/homepage.html:81
+msgid "Smst Stocks"
+msgstr "Hisa za Smst"
+
+#: templates/app/homepage.html:84
+msgid "Stocks, Shop, Analytics"
+msgstr "Hisa, Duka, Uchambuzi"
+
+#: templates/app/states/empty_state.html:142
+msgid "Empty Stocks"
+msgstr "Hifadhi Tupu"
+
+#: templates/app/states/empty_state.html:145
+msgid "Create a New Stock Item which comprises of a Product and its Price."
+msgstr "Unda bidhaa mpya ya hisa inayojumuisha bidhaa na bei yake."
+
+#: templates/app/states/empty_state.html:150
+msgid "Create New Stock"
+msgstr "Unda Hisa Mpya"
+
+#: templates/snippets/extendors/inputs/reset_email_input.html:6
+msgid "Enter your Logged In Email."
+msgstr "Weka barua pepe uliyotumia kuingia."
+
+#: templates/snippets/extendors/inputs/reset_password_input.html:4
+#: templates/snippets/extendors/inputs/reset_password_input_rep.html:4
+msgid "Repeat Your Password"
+msgstr "Rudia nenosiri lako"
+
+#: templates/snippets/extendors/login_password_input.html:5
+msgid "Enter Login Password"
+msgstr "Weka nenosiri la kuingia"
 
 #: templates/user/profile/page.html:12
 msgid "Welcome"
@@ -43,7 +140,6 @@ msgid "Security"
 msgstr "Usalama"
 
 #: templates/user/profile/page.html:84
-#: templates/user/profile/pages/minipages/notifications.html:17
 msgid "Notifications"
 msgstr "Arifa"
 
@@ -52,22 +148,119 @@ msgstr "Arifa"
 msgid "Language"
 msgstr "Lugha"
 
-#: templates/user/profile/pages/minipages/account.html:8
+#: templates/user/profile/page.html:154
+msgid "Logout"
+msgstr "Ondoka"
+
+#: templates/user/profile/pages/editingpages/edit.html:5
+#, python-format
+msgid "Edit your %(edit_name)s"
+msgstr "Hariri %(edit_name)s yako"
+
+#: templates/user/profile/pages/editingpages/edit.html:16
+msgid "Save Changes"
+msgstr "Hifadhi mabadiliko"
+
+#: templates/user/profile/pages/minipages/account.html:9
 msgid "First Name"
 msgstr "Jina La Kwanza"
 
-#: templates/user/profile/pages/minipages/account.html:16
+#: templates/user/profile/pages/minipages/account.html:26
 msgid "Last Name"
 msgstr "Jina La Mwisho"
 
-#: templates/user/profile/pages/minipages/account.html:19
+#: templates/user/profile/pages/minipages/account.html:29
 msgid "Empty"
 msgstr "Tupu"
 
-#: templates/user/profile/pages/minipages/account.html:25
+#: templates/user/profile/pages/minipages/account.html:44
 msgid "Smst Username"
 msgstr "Smst Jina La Mtumiaji"
 
-#: templates/user/profile/pages/minipages/account.html:33
+#: templates/user/profile/pages/minipages/account.html:61
 msgid "Email"
 msgstr "Barua pepe"
+
+#: templates/user/profile/pages/minipages/notifications.html:17
+msgid "Receive Notifications"
+msgstr "Arifa"
+
+#: templates/user/profile/pages/minipages/notifications.html:37
+msgid "Receive Email Notifications"
+msgstr "Pokea Barua Pepe Arifa"
+
+#: templates/user/profile/pages/minipages/security.html:52
+msgid "Change Password"
+msgstr "Badilisha Nenosiri"
+
+#: templates/user/profile/pages/minipages/smstpro.html:11
+msgid "Join Smst Pro and Enjoy Premium Features"
+msgstr "Jiunge na Smst Pro na ufurahie vipengele vya kiwango cha juu."
+
+#: templates/user/profile/pages/minipages/smstpro.html:15
+msgid "Ad Free Smst Apps"
+msgstr "Programu za Smst zisizo na matangazo"
+
+#: templates/user/profile/pages/minipages/smstpro.html:16
+msgid "Raised Limits in Restricted Features."
+msgstr "Viwango vilivyoongezwa katika vipengele vilivyowekewa vikwazo."
+
+#: templates/user/profile/pages/minipages/smstpro.html:17
+msgid "24/7 Contact Support."
+msgstr "Huduma ya usaidizi kwa mawasiliano saa 24 kwa siku, siku 7 kwa wiki."
+
+#: templates/user/profile/pages/minipages/smstpro.html:18
+msgid "Request for your own SmSt App."
+msgstr "Omba programu yako mwenyewe ya SmSt."
+
+#: templates/user/profile/pages/minipages/smstpro.html:24
+msgid "Join Smst Pro"
+msgstr "Jiunge na Smst Pro"
+
+#: templates/user/profile/pages/minipages/smstpro.html:27
+msgid "Cancel"
+msgstr "Ghairi"
+
+#: templates/user/profile/pages/minipages/smstpro.html:33
+msgid "By joining Smst Pro you agree to our"
+msgstr "Kwa kujiunga na Smst Pro unakubali yetu"
+
+#: templates/user/profile/pages/minipages/smstpro.html:33
+msgid "Payment Policy"
+msgstr "Sera ya Malipo"
+
+#: templates/user/profile/pages/minipages/translation.html:59
+msgid "Report Wrong Translation"
+msgstr "Ripoti tafsiri isiyo sahihi"
+
+#: templates/user/profile/pages/verification/password.html:5
+msgid "Verify your Password."
+msgstr "Thibitisha nenosiri lako"
+
+#: templates/user/profile/pages/verification/password.html:10
+msgid "Verify"
+msgstr "Thibitisha"
+
+#: templates/user/profile/pages/verification/password_change.html:5
+msgid "Enter your New Password."
+msgstr "Weka nenosiri lako jipya."
+
+#: templates/user/profile/pages/verification/password_change.html:12
+msgid "Change"
+msgstr "Badilisha"
+
+#: templates/user/profile/username.html:7
+msgid "Username"
+msgstr "Jina La Mtumiaji"
+
+#: templates/user/profile/username.html:11
+msgid "Enter your unique username"
+msgstr "Weka nenosiri lako jipya."
+
+#: templates/user/profile/username.html:36
+msgid "Save Username"
+msgstr "Hifadhi Jina la Mtumiaji"
+
+#~| msgid "Notification"
+#~ msgid "Syndication"
+#~ msgstr "Taarifa"

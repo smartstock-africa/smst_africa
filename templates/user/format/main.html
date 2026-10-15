@@ -17,5 +17,5 @@
 </div>
 {% endblock %}
 {% block script %}
-    <script type="module" src="{% static 'js/account/account.prod.js' %}"></script>
+    <script nonce="{{csp_nonce}}" type="module" src="{% static 'js/account/account.prod.js' %}"></script>
 {% endblock %}

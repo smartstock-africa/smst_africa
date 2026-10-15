@@ -15,7 +15,17 @@ export default [
         Notification: 'readonly',
         gettext: 'readonly',
         navigator: 'readonly',
-        NProgress: 'readonly'
+        NProgress: 'readonly',
+        htmx:'readonly',
+        interpolate: 'readonly',
+        PaystackPop:'readonly',
+        WebSocket:'readonly',
+        history:'readonly',
+        fetch: 'readonly',
+        URL: 'readonly',
+        Image: 'readonly',
+        File: 'readonly',
+        DataTransfer:'readonly'
       }
     },
 

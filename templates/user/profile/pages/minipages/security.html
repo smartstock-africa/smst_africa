@@ -1,5 +1,5 @@
 {% extends 'user/profile/pages/pageHolder.html' %}
-
+{% load i18n %}
 {% block content %}
 <div class="security">
   <div class="securitySetting flex align-center" hx-get="?action=change_password" hx-target=".mainContent" hx-swap="replace">
@@ -49,7 +49,7 @@
       </svg>
     </div>
     <div class="securityText">
-        <span>Change Password</span>
+        <span>{% translate 'Change Password' %}</span>
     </div>
   </div>
 </div>
