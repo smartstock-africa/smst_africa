@@ -21,6 +21,7 @@ def login(request):
 def smst_app(request):
     app = request.GET.get('smst_app')
     if app:    
+        
         return render(request, f'app/apps/{app}.html')
 
     action = request.GET.get('action')

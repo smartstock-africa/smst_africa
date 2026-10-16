@@ -218,8 +218,13 @@ button {
   padding: 8px;
 }
 
-.doubleInput {
+.doubleInput,
+.descriptionOptions {
   gap: 4px;
+}
+
+.descriptionOptionButton {
+  cursor: pointer;
 }
 
 .dIButtonHolder button {
@@ -281,7 +286,11 @@ button {
   opacity: 0;
 }
 
-.imageEditHolder.animate__fadeInUp {
+.imageEdit {
+  opacity: 0;
+}
+
+.imageEditHolder.animate__fadeIn {
   pointer-events: all;
 }
 
@@ -325,6 +334,55 @@ input {
 
 input:focus {
   background: white;
+}
+
+.productDescriptions {
+  margin: 0px 12px;
+}
+
+.productDescription {
+  width: max-content;
+  font-family: var(--Figtree);
+  border-left: 2px solid var(--primary-color);
+  padding: 0px 8px;
+  margin: 4px 0px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.productDescription .descriptionValue {
+  opacity: 0.7;
+  font-size: var(--small-font-size);
+}
+
+.productDescription .descriptionType {
+  font-size: var(--normal-font-value);
+  font-weight: var(--font-weight-bold);
+}
+
+.productDescriptions {
+  overflow: hidden;
+  gap: 8px;
+}
+
+.imageHolder {
+  cursor: pointer;
+  user-select: none;
+}
+
+.messageIconHolder {
+  position: relative;
+}
+
+.notificationDot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: var(--negative-color-background);
+  height: 8px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  box-shadow: var(--small-shadow);
 }
 
 @media (hover: hover) and (pointer: fine) {

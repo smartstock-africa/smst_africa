@@ -11,7 +11,7 @@
                         <div class="productImage">
                             <input id="imageInput" hidden type="file" accept=".jpg,.jpeg">
                             <div class="imageEntity flex">
-                                <div class="imagePreviewHolder">
+                                <div class="imagePreviewHolder animate__animated">
                                     <div class="imagePreview">
                                         <img id="imgPreview">
                                     </div>
@@ -36,9 +36,9 @@
                             <span>{% translate 'Product Name' %}</span>
                         </div>
                         <div class="inputInput">
-                            <input type="text" placeholder="{% translate 'Enter the name of your Product' %}">
+                            <input type="text" id="productName" placeholder="{% translate 'Enter the name of your Product' %}">
                         </div>
-                    </div> 
+                    </div>
                     <div class="inputHolder">
                         <div class="inputLabel titleLabel">
                             <span>{% translate 'Product Description' %}</span>
@@ -50,7 +50,7 @@
                                         <div>{% translate 'Description Type' %}</div>
                                     </div>
                                     <div class="dInput">
-                                        <input type="text" placeholder="{% translate 'e.g Weight' %}">
+                                        <input type="text" id="descriptionType" placeholder="{% translate 'e.g Weight' %}">
                                     </div>
                                 </div>
                                 <div class="dInputHolder flex">
@@ -58,7 +58,7 @@
                                         <div>{% translate 'Description Value' %}</div>
                                     </div>
                                     <div class="dInput">
-                                        <input type="text" placeholder="{% translate 'e.g 500g' %}">
+                                        <input type="text" id="descriptionValue" placeholder="{% translate 'e.g 500g' %}">
                                     </div>
                                 </div>
                             </div>
@@ -68,6 +68,16 @@
                                 </div>
                             </div>
                         </div>
+                    </div> 
+                    <div class="productDescriptionHolder">
+                        <input type="hidden" id="productDescriptionInput" >
+                        <div class="productDescriptions ">
+                        </div>
+                    </div>
+                </div>
+                <div class="formButton">
+                    <div class="formButtonHolder flex">
+                        <button id="createProductButton">{% translate 'Create Product' %}</button>
                     </div>
                 </div>
             </div>
@@ -76,7 +86,7 @@
 </div>
 
 <div class="imageEditHolder animate__animated">
-    <div class="imageEdit">
+    <div class="imageEdit animate__animated">
         <div class="imageEditContainer flex">
             <div class="editImage">
                 <div class="editImageHolder">
@@ -84,11 +94,11 @@
                 </div>
             </div>
             <div class="imageEditButtonHolder flex">
-                <div class="imageEditButton flex">
-                    <button id="cancelEditing">Cancel</button>
+                <div class="imageEditButton flex" style="flex-grow: 0.5">
+                    <button id="cancelEditing" class="secondary-button">{% translate 'Cancel' %}</button>
                 </div>
-                <div class="imageEditButton flex">
-                    <button id="saveEditing">Save</button>
+                <div class="imageEditButton flex" style="flex-grow: 1">
+                    <button id="saveEditing" class="positive-button">{% translate 'Save' %}</button>
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-15 10:27+0200\n"
+"POT-Creation-Date: 2026-10-16 10:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,7 +64,9 @@ msgstr "OTP si sahihi!"
 
 #: dist/js/account/account.js:150 dist/min/account/account.min.js:121
 msgid "Confirm you are entering the latest password and it has not expired."
-msgstr "Thibitisha kuwa unaingiza nenosiri la hivi karibuni na kwamba halijaisha muda wake wa matumizi."
+msgstr ""
+"Thibitisha kuwa unaingiza nenosiri la hivi karibuni na kwamba halijaisha "
+"muda wake wa matumizi."
 
 #: dist/js/account/account.js:172 dist/min/account/account.min.js:138
 msgid "Details Saved"
@@ -132,7 +134,6 @@ msgid "Kindly Fill in the Blank Space"
 msgstr "Tafadhali jaza nafasi iliyo wazi."
 
 #: dist/js/account/profile.js:95 dist/min/account/profile.min.js:64
-#: static/js/account/profile.prod.js:1
 #, fuzzy
 #| msgid "You have updated your %(edit_name)s"
 msgid "You have updated your %(editName)s"
@@ -177,7 +178,6 @@ msgid "You will be logged out after 3 incorrect attempts."
 msgstr "Utatoka kwenye mfumo baada ya majaribio 3 yasiyo sahihi."
 
 #: dist/js/account/profile.js:166 dist/min/account/profile.min.js:122
-#| msgid "Login with your new values"
 msgid "Kindly log in with your new password"
 msgstr "Ingia ukitumia thamani zako mpya"
 
@@ -189,29 +189,74 @@ msgstr "Je, una uhakika?"
 msgid "Kindly click Logout again to confirm"
 msgstr "Tafadhali bofya 'Ondoka' tena ili kuthibitisha."
 
-#: dist/js/app/app.js:46
+#: dist/js/app/app.js:46 dist/min/app/app.min.js:1
+msgid "Loading your Image"
+msgstr "Inapakia picha yako."
+
+#: dist/js/app/app.js:55 dist/min/app/app.min.js:1
 msgid "Image too big"
 msgstr "Picha ni kubwa mno"
 
-#: dist/js/app/app.js:47
+#: dist/js/app/app.js:56 dist/min/app/app.min.js:1
 msgid "Kindly choose an image lower than 5MB"
 msgstr "Tafadhali chagua picha yenye ukubwa wa chini ya 5MB"
 
-#: dist/js/app/app.js:58
+#: dist/js/app/app.js:67 dist/min/app/app.min.js:1
 msgid "Not an Image"
 msgstr "Si picha"
 
-#: dist/js/app/app.js:59
+#: dist/js/app/app.js:68 dist/min/app/app.min.js:1
 msgid "Only JPG and JPEG images are allowed!"
 msgstr "Picha za JPG na JPEG pekee ndizo zinazoruhusiwa!"
 
-#: dist/js/app/app.js:82
+#: dist/js/app/app.js:93 dist/min/app/app.min.js:1
 msgid "Image Processing Failed"
 msgstr "Uchakataji wa picha umeshindwa"
 
-#: dist/js/app/app.js:83
+#: dist/js/app/app.js:94 dist/min/app/app.min.js:1
 msgid "Could not process image, kindly try again"
 msgstr "Imeshindwa kuchakata picha, tafadhali jaribu tena"
+
+#: dist/js/app/app.js:142 dist/min/app/app.min.js:1
+msgid "Maximum Descriptions"
+msgstr "Maelezo ya Kina Zaidi"
+
+#: dist/js/app/app.js:143 dist/min/app/app.min.js:1
+msgid "You have reached your free limit for descriptions."
+msgstr "Umefikia kikomo chako cha bure kwa ajili ya maelezo."
+
+#: dist/js/app/app.js:156 dist/min/app/app.min.js:1
+msgid "Fill Empty Fields"
+msgstr "Jaza Sehemu Tupu"
+
+#: dist/js/app/app.js:157 dist/min/app/app.min.js:1
+msgid "Kindly fill in the empty fields."
+msgstr "Tafadhali jaza nafasi iliyo wazi."
+
+#: dist/js/app/app.js:217 dist/min/app/app.min.js:1
+msgid "Maximum Descriptions Reached"
+msgstr "Kiwango cha juu cha maelezo kimefikiwa"
+
+#: dist/js/app/app.js:218 dist/min/app/app.min.js:1
+msgid "You have reached your maximum of 5 descriptions."
+msgstr "Umefikia kikomo chako cha maelezo 5."
+
+#: dist/js/app/app.js:249 dist/min/app/app.min.js:1
+msgid "Deleted Description"
+msgstr "Maelezo yamefutwa"
+
+#: dist/js/app/app.js:250 dist/min/app/app.min.js:1 static/js/app/app.prod.js:1
+msgid "You have removed the description"
+msgstr "Umeondoa maelezo"
+
+#: dist/js/app/app.js:275 dist/min/app/app.min.js:1
+#, javascript-format
+msgid "Product %s Created"
+msgstr "Bidhaa %s Imeundwa"
+
+#: dist/js/app/app.js:276 dist/min/app/app.min.js:1
+msgid "The product has been saved and added to stock"
+msgstr "Bidhaa imehifadhiwa na kuongezwa kwenye orodha ya bidhaa zilizopo."
 
 #: dist/js/common/dom_loaded.js:42 dist/min/common/dom_loaded.min.js:36
 msgid "Username too short."
@@ -242,6 +287,7 @@ msgid "Kindly allow Notifications."
 msgstr "Tafadhali ruhusu arifa."
 
 #: dist/js/common/functions.js:127 dist/min/common/functions.min.js:88
+#: static/js/common/functions.prod.js:1
 msgid "Notifications Accepted!"
 msgstr "Arifa Zimekubaliwa"
 

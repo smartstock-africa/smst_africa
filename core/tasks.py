@@ -3,10 +3,11 @@ from django.core.mail import EmailMultiAlternatives, get_connection
 from django.template.loader import render_to_string
 from .utils import *
 from django.core.cache import cache
+from django.contrib.auth import get_user_model
 from .decorator import check_email_wrapper
 connection = get_connection()
 from_email = "support@smartstock.africa"
-
+UserModel = get_user_model()
 def send_configured_email(subject, text_content, emails, html_content):
     email_msg = EmailMultiAlternatives(subject, text_content, from_email, emails)
     email_msg.attach_alternative(html_content, 'text/html')
@@ -92,3 +93,14 @@ def send_notification(username, title, body, url="https://user.smartstock.africa
         send_web_push(sub, title, body, url, icon)
         
 
+@shared_task
+def save_notification(title, content, username):
+    from smst_app.models.notifications import AppNotifications
+    user = UserModel.objects.filter(username=username).first()
+    AppNotifications.objects.create(
+        notificationTitle=title,
+        notificationContent=content,
+        notificationUser=user
+    )
+    send_notification.delay(username, title, content, pro=user.has_active_subscription)
+    

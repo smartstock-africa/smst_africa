@@ -25,7 +25,8 @@ export default [
         URL: 'readonly',
         Image: 'readonly',
         File: 'readonly',
-        DataTransfer:'readonly'
+        DataTransfer:'readonly',
+        FormData: 'readonly'
       }
     },
 

@@ -276,11 +276,52 @@ export function saveImage() {
     'image/webp',
     0.9
   );
-  $('.imageEditHolder')
+  fadeOutModal('.imageEdit', '.imageEditHolder');
+  $('.imagePreviewHolder').addClass('animate__fadeIn');
+}
+
+export function fadeInModal(childElement, parentElement) {
+  $(parentElement)
+    .removeClass('animate__fadeOut')
+    .addClass('animate__fadeIn')
+    .one('animationend', function () {
+      $(childElement)
+        .removeClass('animate__fadeOutDown')
+        .addClass('animate__fadeInUp');
+      fadeOutLoader();
+    });
+}
+
+export function fadeOutModal(childElement, parentElement) {
+  $(childElement)
     .removeClass('animate__fadeInUp')
     .addClass('animate__fadeOutDown')
     .one('animationend', function () {
-      $('.imagePreviewHolder').css('opacity', 1);
-      showSuccessMessage('Image Saved', 'The product image has been saved');
+      $(parentElement)
+        .removeClass('animate__fadeIn')
+        .addClass('animate__fadeOut');
+    });
+}
+
+export function loaderScreen(message) {
+  let $loader = $(
+    '<div class="smst_loader animate__animated animate__fadeIn"></div>'
+  );
+  let $childLoader = $('<div class="smst_loader_holder"></div>');
+  let $badgeLogo = $('<div class="badge_logo"></div>');
+  let $messageHolder = $(
+    `<div class="loader_message"><span>${message}</span></div>`
+  );
+
+  $loader.append($childLoader.append($badgeLogo, $messageHolder));
+  $('body').append($loader);
+}
+
+export function fadeOutLoader() {
+  $('.smst_loader')
+    .removeClass('animate__fadeIn')
+    .addClass('animate__fadeOut')
+    .one('animationend', function () {
+      $(this).remove();
     });
 }

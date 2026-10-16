@@ -445,8 +445,9 @@ select:active{
 }
 
 .cropper-view-box{
-  outline: 1px solid var(--primary-color)!important;
-  outline-color: var(--primary-color)!important
+  outline: 1px solid white !important;
+  outline-color: white !important;
+  box-shadow: 0px 0px 0px 2px black;
 }
 
 .cropper-line{
@@ -454,14 +455,73 @@ select:active{
 }
 
 .cropper-point{
-  background-color: var(--primary-color)!important;
-  border-radius: 50%;
+  background-color: white !important;
+  border: 1px solid;
 }
 
 .cropper-modal{
   background-color: var(--secondary-color)!important
 }
 
+button.positive-button{
+  margin: 0;
+  background: var(--positive-color-background);
+}
+
+button.secondary-button{
+  background: var(--secondary-color);
+  margin: 0;
+  color: black;
+}
+
+.smst_loader{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 999;
+  background: var(--secondary-color);
+  display: flex;
+}
+
+.smst_loader_holder{
+  margin: auto;
+  font-family: var(--Inconsolata);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  font-weight: var(--font-weight-heavy);
+  color: var(--black-color-text);
+}
+
+.badge_logo{
+  background-image: url('https://res.cloudinary.com/di3bh4qsl/image/upload/v1790847358/smst_logo_badge_ix7iyn.png');
+  height: 100px;
+  aspect-ratio: 1/1;
+  background-position: center;
+  background-size: contain;
+  animation: twinkle infinite ease-in-out;
+  animation-duration: 1s!important;
+  background-repeat: no-repeat;
+}
+
+@keyframes twinkle {
+  0%{
+    opacity: 1;
+    filter: blur(0px)
+  }
+  50%{
+    filter: blur(1px);
+    opacity: 0.8;
+  }
+  100%{
+    opacity: 1;
+    filter: blur(0px)
+  }
+}
 
 
 @media (hover: hover) and (pointer: fine) {

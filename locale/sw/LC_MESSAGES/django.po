@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-15 10:33+0200\n"
+"POT-Creation-Date: 2026-10-16 10:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,6 +50,15 @@ msgstr "Umeboreshwa hadi Smst Pro"
 msgid "Enjoy Premium Experience"
 msgstr "Furahia uzoefu wa kiwango cha juu"
 
+#: smst_app/models/smst_stock.py:23
+msgid "Stock Updated"
+msgstr "Stoki imesasishwa"
+
+#: smst_app/models/smst_stock.py:23
+#, python-brace-format
+msgid "Product {product_name} has been created"
+msgstr "Bidhaa {product_name} imeundwa"
+
 #: templates/app/apps/smst_stocks/forms/create_product.html:7
 msgid "Create A Product"
 msgstr "Unda Bidhaa"
@@ -89,6 +98,19 @@ msgstr "mf. gramu 500"
 #: templates/app/apps/smst_stocks/forms/create_product.html:67
 msgid "Add Description"
 msgstr "Ongeza Maelezo"
+
+#: templates/app/apps/smst_stocks/forms/create_product.html:80
+msgid "Create Product"
+msgstr "Unda Bidhaa"
+
+#: templates/app/apps/smst_stocks/forms/create_product.html:98
+#: templates/user/profile/pages/minipages/smstpro.html:27
+msgid "Cancel"
+msgstr "Ghairi"
+
+#: templates/app/apps/smst_stocks/forms/create_product.html:101
+msgid "Save"
+msgstr "Hifadhi"
 
 #: templates/app/homepage.html:81
 msgid "Smst Stocks"
@@ -216,10 +238,6 @@ msgstr "Omba programu yako mwenyewe ya SmSt."
 #: templates/user/profile/pages/minipages/smstpro.html:24
 msgid "Join Smst Pro"
 msgstr "Jiunge na Smst Pro"
-
-#: templates/user/profile/pages/minipages/smstpro.html:27
-msgid "Cancel"
-msgstr "Ghairi"
 
 #: templates/user/profile/pages/minipages/smstpro.html:33
 msgid "By joining Smst Pro you agree to our"
